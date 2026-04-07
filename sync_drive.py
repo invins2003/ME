@@ -82,7 +82,7 @@ def process_with_ai(raw_text):
     try:
         # Use the 2026 Pro model equivalent
         response = client.models.generate_content(
-            model='gemini-3.1-pro-preview',
+            model='gemini-3-flash-preview',
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type='application/json' # This forces pure JSON output
