@@ -49,11 +49,12 @@ def process_with_ai(raw_text):
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
     
-    # REST URL as per the curl example logic
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    # REST URL and headers as per the curl example exactly
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
     
     headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-goog-api-key": api_key
     }
     
     prompt = f"""
