@@ -19,6 +19,21 @@ A high-performance, automated portfolio website designed with a modern "tech" ae
 - **How to Launch**: Open the Command Palette (`Ctrl + K`) and type **"game"** or **"invaders"**.
 - **Gameplay**: Move with **Arrow Keys** and fire "Code Fixes" with **Space** to clear production-breaking bugs.
 
+---
+
+## 💎 Featured Product: AmbitDev Workspace IDE
+**A high-fidelity Markdown IDE designed for technical writers and power users.**
+
+### 🚀 Key Features:
+- **Direct Word-to-MD Conversion**: Built-in **mammoth.js** integration to convert `.docx` files into clean, semantic Markdown.
+- **Smart Paste Sanitizer**: High-performance cleaning of Microsoft Word and Google Docs clipboards, removing junk CSS and metadata.
+- **Real-time Sync-Engine**: High-fidelity side-by-side preview of Markdown code and visual output.
+- **Premium macOS Aesthetic**: Glassmorphism 2.0 interface with Fira Code typography and vibrant cyan themes.
+
+[**Launch Workspace →**](workspace.html)
+
+---
+
 ## 🎨 Design Aesthetic
 - **Glassmorphism**: Advanced blur effects and semi-transparent layers.
 - **Matrix Background**: A custom HTML5 Canvas animation with interactive nodes that react to mouse movement.
