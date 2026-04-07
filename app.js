@@ -169,19 +169,320 @@ function buildPortfolio(data) {
         li.textContent = cert;
         certList.appendChild(li);
     });
+
+    // Initialize New UX Features
+    initCursor();
+    initCommandPalette(data);
+    initHireMe();
+    initBugInvaders();
 }
 
-function typeWriter(element, text, index) {
-    if (index < text.length) {
-        element.textContent += text.charAt(index);
-        setTimeout(() => typeWriter(element, text, index + 1), 60);
-    } else {
-        setTimeout(() => { element.style.borderRight = 'none'; }, 2000);
+// ---------------------------------------------------------
+// CUSTOM CURSOR LOGIC
+// ---------------------------------------------------------
+function initCursor() {
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
+
+    window.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // Event Delegation for hover effects - more robust for dynamic/modal content
+    document.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('a, button, .repo-card, .timeline-item, .skill-tag, .palette-item, #palette-search');
+        if (target) {
+            cursor.classList.add('hover');
+        } else {
+            cursor.classList.remove('hover');
+        }
+    });
+}
+
+// ---------------------------------------------------------
+// COMMAND PALETTE LOGIC
+// ---------------------------------------------------------
+function initCommandPalette(data) {
+    const palette = document.getElementById('palette-modal');
+    const searchInput = document.getElementById('palette-search');
+    const resultsContainer = document.getElementById('palette-results');
+    
+    if (!palette) return;
+
+    // Commands Registry
+    const commands = [
+        { title: 'Go to Experience', section: 'experience-list', icon: 'fa-briefcase', shortcut: 'E' },
+        { title: 'Go to Projects', section: 'projects-grid', icon: 'fa-rocket', shortcut: 'P' },
+        { title: 'View Technical Stack', section: 'skills-container', icon: 'fa-gears', shortcut: 'S' },
+        { title: 'View Education', section: 'education-list', icon: 'fa-graduation-cap', shortcut: 'D' },
+        { title: 'GitHub Profile', url: 'https://github.com/invins2003', icon: 'fa-github', shortcut: 'G' },
+        { title: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/ambit-misra-5b2202241', icon: 'fa-linkedin', shortcut: 'L' },
+        { title: 'Game: Launch Bug Invaders', game: true, icon: 'fa-bug-slash', shortcut: 'G' }
+    ];
+
+    // Add Projects to palette
+    data.projects.forEach(p => {
+        commands.push({
+            title: `Project: ${p.title}`,
+            url: p.link,
+            icon: 'fa-code-branch',
+            shortcut: 'Proj'
+        });
+    });
+
+    function togglePalette() {
+        const isVisible = palette.style.display === 'flex';
+        palette.style.display = isVisible ? 'none' : 'flex';
+        if (!isVisible) {
+            searchInput.value = '';
+            searchInput.focus();
+            renderResults('');
+        }
     }
+
+    function renderResults(query) {
+        resultsContainer.innerHTML = '';
+        const filtered = commands.filter(c => 
+            c.title.toLowerCase().includes(query.toLowerCase())
+        );
+
+        filtered.forEach((cmd, idx) => {
+            const item = document.createElement('div');
+            item.className = 'palette-item';
+            if (idx === 0) item.classList.add('active');
+            
+            item.innerHTML = `
+                <div class="item-info">
+                    <i class="fa-solid ${cmd.icon}"></i>
+                    <span>${cmd.title}</span>
+                </div>
+                <span class="item-shortcut">${cmd.shortcut}</span>
+            `;
+
+            item.onclick = () => executeCommand(cmd);
+            resultsContainer.appendChild(item);
+        });
+    }
+
+    function executeCommand(cmd) {
+        togglePalette();
+        if (cmd.section) {
+            document.getElementById(cmd.section).scrollIntoView({ behavior: 'smooth' });
+        } else if (cmd.url) {
+            window.open(cmd.url, '_blank');
+        } else if (cmd.game) {
+            document.getElementById('game-modal').style.display = 'flex';
+        }
+    }
+
+    // Shortcut listener (Ctrl+K / Cmd+K)
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            togglePalette();
+        }
+        if (e.key === 'Escape' && palette.style.display === 'flex') {
+            togglePalette();
+        }
+    });
+
+    // Close on click outside
+    palette.onclick = (e) => {
+        if (e.target === palette) togglePalette();
+    };
+
+    // Search input listener
+    searchInput.oninput = (e) => renderResults(e.target.value);
+}
+
+// ---------------------------------------------------------
+// HIRE ME MODAL LOGIC
+// ---------------------------------------------------------
+function initHireMe() {
+    const hireBtn = document.getElementById('hire-me-btn');
+    const hireModal = document.getElementById('hire-modal');
+    const closeBtns = document.querySelectorAll('.close-modal-btn');
+
+    if (!hireBtn || !hireModal) return;
+
+    hireBtn.onclick = () => {
+        hireModal.style.display = 'flex';
+    };
+
+    closeBtns.forEach(btn => {
+        btn.onclick = () => {
+            hireModal.style.display = 'none';
+        };
+    });
+
+    hireModal.onclick = (e) => {
+        if (e.target === hireModal) hireModal.style.display = 'none';
+    };
+}
+
+// ---------------------------------------------------------
+// BUG INVADERS GAME ENGINE
+// ---------------------------------------------------------
+function initBugInvaders() {
+    const modal = document.getElementById('game-modal');
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('start-game-btn');
+    const scoreEl = document.getElementById('game-score');
+
+    let gameActive = false;
+    let score = 0;
+    let highScore = localStorage.getItem('bugInvadersHiScore') || 0;
+    
+    // Game Config
+    canvas.width = 600;
+    canvas.height = 400;
+    const bugRows = 4;
+    const bugCols = 8;
+    const bugWidth = 40;
+    const bugHeight = 20;
+
+    let player = { x: canvas.width / 2 - 15, y: canvas.height - 30, w: 30, h: 20, speed: 5 };
+    let bullets = [];
+    let bugs = [];
+    let bugDirection = 1;
+    let bugSpeed = 1;
+    let keys = {};
+
+    function initBugs() {
+        bugs = [];
+        const bugTypes = ['NullPointer', '404', 'Leak', 'StackFlow'];
+        for (let r = 0; r < bugRows; r++) {
+            for (let c = 0; c < bugCols; c++) {
+                bugs.push({
+                    x: c * (bugWidth + 15) + 50,
+                    y: r * (bugHeight + 15) + 50,
+                    w: bugWidth,
+                    h: bugHeight,
+                    type: bugTypes[r % bugTypes.length],
+                    alive: true
+                });
+            }
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw Player (>_)
+        ctx.fillStyle = '#00f7ff';
+        ctx.font = 'bold 16px Fira Code';
+        ctx.fillText('>_', player.x, player.y + player.h);
+
+        // Draw Bullets (|)
+        ctx.fillStyle = '#fff';
+        bullets.forEach((b, i) => {
+            ctx.fillRect(b.x, b.y, 2, 8);
+            b.y -= 7;
+            if (b.y < 0) bullets.splice(i, 1);
+        });
+
+        // Draw Bugs
+        let reachedEdge = false;
+        bugs.forEach(bug => {
+            if (!bug.alive) return;
+            
+            ctx.fillStyle = '#ff0055';
+            ctx.font = '10px Fira Code';
+            ctx.fillText(bug.type, bug.x, bug.y + 12);
+            
+            bug.x += bugDirection * bugSpeed;
+            if (bug.x + bug.w > canvas.width || bug.x < 0) reachedEdge = true;
+
+            // Collision with Bullets
+            bullets.forEach((bullet, bi) => {
+                if (bullet.x > bug.x && bullet.x < bug.x + bug.w &&
+                    bullet.y > bug.y && bullet.y < bug.y + bug.h) {
+                    bug.alive = false;
+                    bullets.splice(bi, 1);
+                    score += 100;
+                }
+            });
+
+            // Collision with Player or Bottom
+            if (bug.y + bug.h > player.y) {
+                gameOver();
+            }
+        });
+
+        if (reachedEdge) {
+            bugDirection *= -1;
+            bugs.forEach(b => b.y += 10);
+        }
+
+        // Clean dead bugs
+        if (bugs.every(b => !b.alive)) {
+            bugSpeed += 0.5;
+            initBugs();
+        }
+
+        scoreEl.innerText = `Score: ${score} | High: ${highScore}`;
+
+        if (keys['ArrowLeft'] && player.x > 0) player.x -= player.speed;
+        if (keys['ArrowRight'] && player.x + player.w < canvas.width) player.x += player.speed;
+
+        if (gameActive) requestAnimationFrame(draw);
+    }
+
+    function gameOver() {
+        gameActive = false;
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('bugInvadersHiScore', highScore);
+        }
+        alert(`PRODUCTION CRASHED! Final Score: ${score}`);
+        resetGame();
+    }
+
+    function resetGame() {
+        score = 0;
+        bugSpeed = 1;
+        player.x = canvas.width / 2 - 15;
+        bullets = [];
+        initBugs();
+        document.getElementById('game-start-overlay').style.display = 'block';
+    }
+
+    startBtn.onclick = () => {
+        document.getElementById('game-start-overlay').style.display = 'none';
+        score = 0;
+        gameActive = true;
+        initBugs();
+        draw();
+    };
+
+    window.addEventListener('keydown', (e) => {
+        keys[e.key] = true;
+        if (modal.style.display === 'flex' && e.key === ' ') {
+            e.preventDefault();
+            bullets.push({ x: player.x + player.w / 2, y: player.y });
+        }
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            gameActive = false;
+            modal.style.display = 'none';
+        }
+    });
+
+    window.addEventListener('keyup', (e) => keys[e.key] = false);
+
+    // Close on click outside
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            gameActive = false;
+            modal.style.display = 'none';
+        }
+    };
 }
 
 function renderProjects(projects) {
     const projGrid = document.getElementById('projects-grid');
+    if (!projGrid) return;
     projGrid.innerHTML = '';
 
     if (!projects || projects.length === 0) {
@@ -189,13 +490,14 @@ function renderProjects(projects) {
         return;
     }
 
-    // Helper to ensure absolute links (duplicated inside for local scope or move to global)
     const ensureAbsolute = (url) => {
         if (!url || url === '#') return '#';
-        if (url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('tel:')) return url;
-        if (url.startsWith('www.')) return `https://${url}`;
-        if (url.includes('.') || url.includes('/')) return `https://${url}`;
-        return url;
+        if (typeof url !== 'string') return '#';
+        const str = url.trim();
+        if (str.startsWith('http') || str.startsWith('mailto:') || str.startsWith('tel:')) return str;
+        if (str.startsWith('www.')) return `https://${str}`;
+        if (str.includes('.') || str.includes('/')) return `https://${str}`;
+        return str;
     };
 
     projects.forEach((proj, idx) => {
@@ -203,7 +505,7 @@ function renderProjects(projects) {
         item.className = 'repo-card fade-in';
         item.style.animationDelay = `${0.3 + idx * 0.15}s`;
 
-        let tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        let tagsHtml = proj.tags ? proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : '';
 
         item.innerHTML = `
             <div>
@@ -221,8 +523,4 @@ function renderProjects(projects) {
         `;
         projGrid.appendChild(item);
     });
-}
-
-async function fetchGitHubData(username) {
-    // Deprecated in favor of server-side fetch during sync
 }

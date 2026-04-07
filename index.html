@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
     <!-- Background Animation Canvas -->
     <canvas id="bg-canvas"></canvas>
 
@@ -19,6 +22,7 @@
                     <span>&lt;/&gt; AMBIT.DEV</span>
                 </div>
                 <div class="nav-links">
+                    <button id="hire-me-btn" class="primary-btn hire-me-btn"><i class="fa-solid fa-paper-plane"></i> Hire Me</button>
                 </div>
             </nav>
 
@@ -106,6 +110,58 @@
             </footer>
         </div>
     </main>
+
+    <!-- Modals -->
+    <div id="palette-modal" class="modal-overlay">
+        <div class="palette-container">
+            <div class="palette-input-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="palette-search" placeholder="Search commands, sections, projects..." autocomplete="off">
+            </div>
+            <div id="palette-results">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <div id="hire-modal" class="modal-overlay">
+        <div class="palette-container hire-me-content">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-paper-plane"></i> Let's Collaborate</h2>
+                <div class="title-line"></div>
+            </div>
+            <p class="bio">I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+            
+            <div class="hire-me-form-grid">
+                <div class="stat"><i class="fa-solid fa-envelope"></i> ambitmisra@gmail.com</div>
+                <div class="stat"><i class="fa-solid fa-phone"></i> +91 8456932901</div>
+                <a href="mailto:ambitmisra@gmail.com" class="primary-btn" style="justify-content: center; margin-top: 1rem;">
+                    <i class="fa-solid fa-envelope-open-text"></i> Send Direct Email
+                </a>
+                <button class="primary-btn close-modal-btn" style="justify-content: center; background: transparent; border-color: var(--text-muted); color: var(--text-muted);">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-modal" class="modal-overlay">
+        <div class="palette-container game-content" style="max-width: 800px; width: 95%;">
+            <div class="game-header" style="display: flex; justify-content: space-between; padding: 1rem; font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); border-bottom: 1px solid var(--border-glass);">
+                <span><i class="fa-solid fa-bug-slash"></i> BUG INVADERS V1.0</span>
+                <span id="game-score">Score: 0 | High: 0</span>
+            </div>
+            <div style="background: rgba(0,0,0,0.4); padding: 10px; display: flex; justify-content: center;">
+                <canvas id="game-canvas"></canvas>
+            </div>
+            <div class="game-footer" style="padding: 1rem; text-align: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
+                <p><i class="fa-solid fa-keyboard"></i> ARROWS to Move | SPACE to Fix Bugs | ESC to Exit</p>
+                <div id="game-start-overlay" style="margin-top: 1rem;">
+                    <button id="start-game-btn" class="primary-btn" style="width: auto;">INITIALIZE SYSTEM</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="constants.js"></script>
