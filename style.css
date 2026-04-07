@@ -507,3 +507,181 @@ main { position: relative; z-index: 1; }
     .profile-info h1 { font-size: 2.5rem; }
 }
 
+/* ---------------------------------------------------------
+   PHONE EMULATOR STYLES
+--------------------------------------------------------- */
+.right-col {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.phone-frame {
+    width: 260px;
+    height: 540px;
+    margin: 0 auto 3rem;
+    background: #07070a;
+    border-radius: 38px;
+    padding: 10px;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 
+                inset 0 0 20px rgba(0, 247, 255, 0.05);
+    transform: perspective(1000px) rotateY(-8deg);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 100;
+}
+
+.phone-frame:hover {
+    transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+}
+
+.phone-inner {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-notch {
+    width: 110px;
+    height: 22px;
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    z-index: 10;
+}
+
+.phone-screen {
+    flex: 1;
+    width: 100%;
+    padding: 35px 12px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-screen::-webkit-scrollbar { display: none; }
+
+.phone-home-button {
+    width: 90px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.phone-home-button:hover { 
+    background: var(--accent-primary);
+    transform: translateX(-50%) scaleX(1.1);
+}
+
+/* App Simulator UI Templates */
+.app-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-title { font-size: 1rem; color: var(--accent-primary); font-weight: bold; }
+
+.app-home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding-top: 15px;
+}
+
+.app-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.app-link:hover { transform: translateY(-3px); }
+
+.app-link-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.app-link-text {
+    font-size: 0.6rem;
+    margin-top: 6px;
+    color: var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* Chat View */
+.chat-container { display: flex; flex-direction: column; gap: 8px; }
+.chat-bubble {
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    max-width: 85%;
+    position: relative;
+    animation: slideUp 0.3s ease-out forwards;
+}
+.chat-sent { background: var(--accent-primary); color: #000; align-self: flex-end; border-bottom-right-radius: 2px; }
+.chat-received { background: #1a1a1f; color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
+
+/* Dashboard/List View */
+.list-item {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    border-left: 2px solid var(--accent-primary);
+}
+
+.list-item-title { font-weight: bold; color: var(--text-main); }
+.list-item-status { font-size: 0.55rem; color: var(--accent-primary); opacity: 0.8; }
+
+.phone-reflection {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%);
+    pointer-events: none;
+    border-radius: 38px;
+}
+
+@media (max-width: 1100px) {
+    .phone-frame { display: none; }
+    .right-col { position: static; }
+}

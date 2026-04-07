@@ -175,6 +175,7 @@ function buildPortfolio(data) {
     initCommandPalette(data);
     initHireMe();
     initBugInvaders();
+    initPhoneSimulator(data);
 }
 
 // ---------------------------------------------------------
@@ -518,9 +519,139 @@ function renderProjects(projects) {
                 <p class="repo-desc">${proj.description}</p>
             </div>
             <div class="repo-footer">
+                <button class="primary-btn sm-btn launch-app-btn" data-project="${proj.title}">
+                    <i class="fa-solid fa-mobile-screen-button"></i> View App
+                </button>
                 ${tagsHtml}
             </div>
         `;
+
+        item.querySelector('.launch-app-btn').onclick = () => {
+            if (window.innerWidth > 1100) {
+                launchPhoneApp(proj.title);
+            } else {
+                alert("Launch the desktop version to experience the Phone Emulator!");
+            }
+        };
+
         projGrid.appendChild(item);
     });
+}
+// ---------------------------------------------------------
+// PHONE SIMULATOR LOGIC
+// ---------------------------------------------------------
+let allProjectsData = [];
+
+function initPhoneSimulator(data) {
+    allProjectsData = data.projects;
+    renderPhoneHome();
+
+    const homeBtn = document.getElementById('phone-home-btn');
+    if (homeBtn) {
+        homeBtn.onclick = renderPhoneHome;
+    }
+}
+
+function renderPhoneHome() {
+    const viewport = document.getElementById('simulator-viewport');
+    if (!viewport) return;
+
+    viewport.innerHTML = `
+        <div class="app-header">
+            <div class="app-title">Home</div>
+        </div>
+        <div class="app-home-grid">
+            ${allProjectsData.map(proj => `
+                <div class="app-link" onclick="launchPhoneApp('${proj.title}')">
+                    <div class="app-link-icon">
+                        <i class="fa-solid ${getProjectIcon(proj.title)}"></i>
+                    </div>
+                    <div class="app-link-text">${proj.title}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function launchPhoneApp(projectName) {
+    const project = allProjectsData.find(p => p.title === projectName);
+    if (!project) return;
+
+    const viewport = document.getElementById('simulator-viewport');
+    viewport.innerHTML = `
+        <div class="app-header">
+            <div class="app-title">${project.title}</div>
+        </div>
+        <div class="app-content">
+            ${getAppTemplate(project)}
+        </div>
+    `;
+    
+    // Auto-scroll to sidebar on desktop if not in view
+    if (window.innerWidth > 1100) {
+        document.getElementById('phone-emulator').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function getProjectIcon(name) {
+    const icons = {
+        'OneChat': 'fa-comments',
+        'ME': 'fa-user-astronaut',
+        'shopEase': 'fa-cart-shopping',
+        'TrackMyLocation': 'fa-location-crosshairs',
+        'V-Notes': 'fa-note-sticky'
+    };
+    return icons[name] || 'fa-rocket';
+}
+
+function getAppTemplate(proj) {
+    const type = proj.title.toLowerCase();
+    
+    if (type.includes('chat')) {
+        return `
+            <div class="chat-container">
+                <div class="chat-bubble chat-received">Hey! How does ${proj.title} work?</div>
+                <div class="chat-bubble chat-sent">It's built with Flutter and uses a robust socket architecture for real-time messaging.</div>
+                <div class="chat-bubble chat-received">Nice! What's the main tech stack?</div>
+                <div class="chat-bubble chat-sent">${proj.tags.join(', ')}</div>
+                <div class="chat-bubble chat-received">Awesome. Checking it out now!</div>
+            </div>
+        `;
+    }
+
+    if (type.includes('shop') || type.includes('me')) {
+        return `
+            <div class="list-container">
+                <div class="list-item">
+                    <span class="list-item-title">Production Build</span>
+                    <span class="list-item-status">STABLE</span>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-title">UI/UX Layout</span>
+                    <span class="list-item-status">GLASSMORPHIC</span>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-title">Performance</span>
+                    <span class="list-item-status">60 FPS</span>
+                </div>
+                <p class="tech-text" style="font-size: 0.6rem; margin-top: 10px; opacity: 0.7;">
+                    ${proj.description}
+                </p>
+                <button class="primary-btn" style="width: 100%; font-size: 0.6rem; padding: 8px; margin-top: 15px;">
+                    INITIALIZE VIEW
+                </button>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="dashboard-loading">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; color: var(--accent-primary); display: block; text-align: center; margin: 30px 0;"></i>
+            <p class="tech-text" style="text-align: center; font-size: 0.7rem;">Connecting to ${proj.title} secure cloud...</p>
+            <div class="list-item" style="margin-top: 20px;">
+                <span class="list-item-title">Status</span>
+                <span class="list-item-status">ENCRYPTED</span>
+            </div>
+        </div>
+    `;
 }
