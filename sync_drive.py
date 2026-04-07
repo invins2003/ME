@@ -1,12 +1,12 @@
 import os
 import requests
-import time
 import json
 import glob
 import re
 import gdown
 from PyPDF2 import PdfReader
 from docx import Document
+from google import genai
 
 # Folder ID extracted from the provided Google Drive link
 DRIVE_FOLDER_ID = "1sTYUsVAt_Dr599SsDDaizP3-RjweCfMu"
@@ -45,18 +45,13 @@ def extract_text_from_files():
     return text_content
 
 def process_with_ai(raw_text):
-    print("Calling Gemini API via REST (requests)...")
+    print("Calling Gemini API via Official SDK (google-genai)...")
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
     
-    # Upgraded to Gemini 3.1 Pro for state-of-the-art accuracy
-    url = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent"
-    
-    headers = {
-        "Content-Type": "application/json",
-        "X-goog-api-key": api_key
-    }
+    # Initialize the official GenAI SDK Client
+    client = genai.Client(api_key=api_key)
     
     prompt = f"""
     You are an expert data structured parser. Below is the raw extracted text from a user's resume/portfolio PDF.
@@ -89,53 +84,28 @@ def process_with_ai(raw_text):
     {raw_text}
     """
     
-    payload = {
-        "contents": [
-            {
-                "parts": [
-                    {
-                        "text": prompt
-                    }
-                ]
-            }
-        ]
-    }
-    
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            response = requests.post(url, headers=headers, json=payload)
-            result = response.json()
-            
-            # Handle specifically 503 (Overloaded) or 429 (Rate Limit)
-            if response.status_code in [429, 503]:
-                print(f"Gemini API is busy/throttled (Attempt {attempt + 1}/{max_retries}). Retrying in 10s...")
-                time.sleep(10)
-                continue
-                
-            if "candidates" not in result:
-                print("API Error Response:", result)
-                raise ValueError(f"Gemini API Error: {result.get('error', {}).get('message', 'Unknown response structure')}")
-                
-            response_text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
-            
-            # Strip markdown block if it was still added
-            if response_text.startswith("```json"):
-                response_text = response_text[7:]
-            if response_text.endswith("```"):
-                response_text = response_text[:-3]
-            
-            # Validate and format JSON
-            parsed_json = json.loads(response_text.strip())
-            return json.dumps(parsed_json)
+    try:
+        # Use the flagship Gemini 1.5 Pro model as requested by user
+        response = client.models.generate_content(
+            model='gemini-1.5-pro',
+            contents=prompt
+        )
+        
+        response_text = response.text.strip()
+        
+        # Strip markdown block if it was still added
+        if response_text.startswith("```json"):
+            response_text = response_text[7:]
+        if response_text.endswith("```"):
+            response_text = response_text[:-3]
+        
+        # Validate and format JSON
+        parsed_json = json.loads(response_text.strip())
+        return json.dumps(parsed_json)
 
-        except Exception as e:
-            if attempt == max_retries - 1:
-                raise e
-            print(f"Request failed: {e}. Retrying in 5s...")
-            time.sleep(5)
-    
-    raise ValueError("Failed to get response from Gemini API after multiple retries.")
+    except Exception as e:
+        print(f"Gemini SDK Error: {e}")
+        raise e
 
 def rewrite_constants(json_payload):
     print("Updating constants.js with live data...")
