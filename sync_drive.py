@@ -1,5 +1,6 @@
 import os
 import requests
+import time
 import json
 import glob
 import re
@@ -100,34 +101,46 @@ def process_with_ai(raw_text):
         ]
     }
     
-    response = requests.post(url, headers=headers, json=payload)
-    result = response.json()
-    
-    if "candidates" not in result:
-        print("API Error Response:", result)
-        raise ValueError(f"Gemini API Error: {result.get('error', {}).get('message', 'Unknown response structure')}")
-        
-    response_text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
-    
-    # Strip markdown block if it was still added
-    if response_text.startswith("```json"):
-        response_text = response_text[7:]
-    if response_text.endswith("```"):
-        response_text = response_text[:-3]
-        
-    try:
-        # Validate that it is parseable JSON
-        parsed_json = json.loads(response_text)
-        return json.dumps(parsed_json, indent=4)
-    except json.JSONDecodeError as e:
-        print("Failed to decode AI response as JSON")
-        print("Raw response:", response.text)
-        raise e
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(url, headers=headers, json=payload)
+            result = response.json()
+            
+            # Handle specifically 503 (Overloaded) or 429 (Rate Limit)
+            if response.status_code in [429, 503]:
+                print(f"Gemini API is busy/throttled (Attempt {attempt + 1}/{max_retries}). Retrying in 10s...")
+                time.sleep(10)
+                continue
+                
+            if "candidates" not in result:
+                print("API Error Response:", result)
+                raise ValueError(f"Gemini API Error: {result.get('error', {}).get('message', 'Unknown response structure')}")
+                
+            response_text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
+            
+            # Strip markdown block if it was still added
+            if response_text.startswith("```json"):
+                response_text = response_text[7:]
+            if response_text.endswith("```"):
+                response_text = response_text[:-3]
+            
+            # Validate and format JSON
+            parsed_json = json.loads(response_text.strip())
+            return json.dumps(parsed_json)
 
-def rewrite_constants(json_data_str):
-    print("Overwriting constants.js...")
-    file_content = f"const PORTFOLIO_DATA = {json_data_str};\n"
-    with open("constants.js", "w", encoding="utf-8") as f:
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise e
+            print(f"Request failed: {e}. Retrying in 5s...")
+            time.sleep(5)
+    
+    raise ValueError("Failed to get response from Gemini API after multiple retries.")
+
+def rewrite_constants(json_payload):
+    print("Updating constants.js with live data...")
+    file_content = f"const PORTFOLIO_DATA = {json_payload};\n"
+    with open("constants.js", "w") as f:
         f.write(file_content)
     print("Update successful!")
 
