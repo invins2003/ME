@@ -24,7 +24,7 @@ function initCanvas() {
 
 function animateCanvas() {
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = 'rgba(0, 255, 204, 0.5)';
+    ctx.fillStyle = 'rgba(0, 247, 255, 0.4)';
     
     particles.forEach(p => {
         p.x += p.vx;
@@ -40,7 +40,7 @@ function animateCanvas() {
         ctx.fill();
     });
     
-    ctx.strokeStyle = 'rgba(0, 255, 204, 0.05)';
+    ctx.strokeStyle = 'rgba(0, 247, 255, 0.04)';
     for(let i = 0; i < particles.length; i++) {
         for(let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
@@ -68,8 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function buildPortfolio(data) {
-    // Top Nav
-    document.getElementById('nav-name').textContent = data.personalInfo.name;
+    if (!data) return;
     
     // Set Profile Avatar and GitHub link immediately (reliable shortcut)
     const githubUsername = 'invins2003';
@@ -78,8 +77,8 @@ function buildPortfolio(data) {
 
     // Hero Section
     const nameEl = document.getElementById('user-name');
+    nameEl.textContent = data.personalInfo.name;
     nameEl.setAttribute('data-text', data.personalInfo.name);
-    typeWriter(nameEl, data.personalInfo.name, 0);
 
     document.getElementById('user-role').textContent = data.personalInfo.role;
     document.getElementById('user-summary').textContent = data.personalInfo.summary;
@@ -203,56 +202,5 @@ function renderProjects(projects) {
 }
 
 async function fetchGitHubData(username) {
-    const projGrid = document.getElementById('projects-grid');
-    projGrid.innerHTML = '<p class="tech-text" style="grid-column: 1/-1; text-align: center;">Fetching live projects...</p>';
-    
-    try {
-        const [userResp, reposResp] = await Promise.all([
-            fetch(`https://api.github.com/users/${username}`),
-            fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`)
-        ]);
-        
-        const user = await userResp.json();
-        const repos = await reposResp.json();
-
-        // Update Profile Image
-        if (user.avatar_url) {
-            document.getElementById('user-avatar').src = user.avatar_url;
-        }
-        
-        // Update GitHub Link
-        if (user.html_url) {
-            document.getElementById('user-github').href = user.html_url;
-        }
-        
-        projGrid.innerHTML = '';
-        repos.forEach((repo, idx) => {
-            const item = document.createElement('div');
-            item.className = 'repo-card fade-in';
-            item.style.animationDelay = `${0.2 + idx * 0.1}s`;
-            
-            const lang = repo.language || "Project";
-            const desc = repo.description || "Source code on GitHub.";
-            
-            item.innerHTML = `
-                <div>
-                    <div class="repo-header">
-                        <h3 class="repo-title">
-                            <i class="fa-solid fa-code-branch" style="color: var(--accent-primary)"></i>
-                            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
-                        </h3>
-                    </div>
-                    <p class="repo-desc">${desc}</p>
-                </div>
-                <div class="repo-footer">
-                    <span class="tag">${lang}</span>
-                    <span class="tag"><i class="fa-solid fa-star"></i> ${repo.stargazers_count}</span>
-                </div>
-            `;
-            projGrid.appendChild(item);
-        });
-    } catch (err) {
-        console.error("GitHub API Error:", err);
-        projGrid.innerHTML = '<p class="error-msg" style="grid-column: 1/-1; text-align: center;">Failed to load GitHub repositories.</p>';
-    }
+    // Deprecated in favor of server-side fetch during sync
 }

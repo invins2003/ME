@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambit Misra | Portfolio</title>
+    <title>Ambit Misra | Senior Flutter & Mobile Developer</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -13,109 +13,103 @@
     <canvas id="bg-canvas"></canvas>
 
     <main id="app">
-        <!-- Main Portfolio Section -->
-        <section id="portfolio-section" class="active">
-            <nav class="glass-nav">
+        <div class="portfolio-container">
+            <nav class="glass-nav fade-in">
                 <div class="nav-brand">
-                    <i class="fa-solid fa-code"></i>
-                    <span style="margin-left: 10px; color: var(--text-main); font-size: 1.2rem;" id="nav-name"></span>
+                    <span>&lt;/&gt; AMBIT.DEV</span>
                 </div>
                 <div class="nav-links">
                 </div>
             </nav>
 
-            <div class="portfolio-container">
-                <!-- Hero Header -->
-                <header class="profile-header glass-card fade-in">
-                    <div class="avatar-container">
-                        <img id="user-avatar" src="" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--accent-primary); object-fit: cover;">
+            <!-- Hero Header -->
+            <header class="profile-header glass-card fade-in">
+                <div class="avatar-container">
+                    <img id="user-avatar" src="" alt="Profile Image" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-primary); padding: 5px;">
+                </div>
+                <div class="profile-info">
+                    <h1 id="user-name" class="glitch" data-text=""></h1>
+                    <p id="user-role" class="tech-text"></p>
+                    <p id="user-summary" class="bio"></p>
+                    
+                    <div class="stats">
+                        <div class="stat"><i class="fa-solid fa-location-dot"></i> <span id="user-location"></span></div>
+                        <div class="stat"><i class="fa-solid fa-envelope"></i> <span id="user-email"></span></div>
+                        <div class="stat"><i class="fa-solid fa-phone"></i> <span id="user-phone"></span></div>
                     </div>
-                    <div class="profile-info">
-                        <h1 id="user-name" class="typewriter glitch" data-text=""></h1>
-                        <p id="user-role" class="tech-text"></p>
-                        <p id="user-summary" class="bio"></p>
-                        
-                        <div class="stats" style="margin-bottom: 25px;">
-                            <div class="stat"><i class="fa-solid fa-location-dot"></i> <span id="user-location"></span></div>
-                            <div class="stat"><i class="fa-solid fa-envelope"></i> <span id="user-email"></span></div>
-                            <div class="stat"><i class="fa-solid fa-phone"></i> <span id="user-phone"></span></div>
-                        </div>
 
-                        <div class="profile-actions">
-                            <a id="user-linkedin" href="#" target="_blank" class="primary-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                            <a id="user-github" href="#" target="_blank" class="primary-btn"><i class="fa-brands fa-github"></i> GitHub</a>
-                        </div>
+                    <div class="profile-actions">
+                        <a id="user-linkedin" href="#" target="_blank" class="primary-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                        <a id="user-github" href="#" target="_blank" class="primary-btn"><i class="fa-brands fa-github"></i> GitHub</a>
                     </div>
-                </header>
+                </div>
+            </header>
 
-                <!-- Two Column Layout: Main Content and Sidebar -->
-                <div class="layout-grid">
-                    <!-- Left Column -->
-                    <div class="left-col">
-                        <!-- Experience Section -->
-                        <div class="content-section">
-                            <div class="section-title fade-in">
-                                <h2><i class="fa-solid fa-briefcase"></i> Work Experience</h2>
-                                <div class="title-line"></div>
-                            </div>
-                            <div id="experience-list" class="timeline">
-                                <!-- Injected via app.js -->
-                            </div>
+            <!-- Main Layout Grid -->
+            <div class="layout-grid">
+                <!-- Left Column -->
+                <div class="left-col">
+                    <!-- Experience Section -->
+                    <div class="content-section">
+                        <div class="section-title fade-in">
+                            <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
+                            <div class="title-line"></div>
                         </div>
-
-                        <!-- Projects Section -->
-                        <div class="content-section" style="margin-top: 4rem;">
-                            <div class="section-title fade-in">
-                                <h2><i class="fa-solid fa-rocket"></i> Key Projects</h2>
-                                <div class="title-line"></div>
-                            </div>
-                            <div id="projects-grid" class="repos-grid">
-                                <!-- Injected via app.js -->
-                            </div>
+                        <div id="experience-list" class="timeline">
+                            <!-- Injected via app.js -->
                         </div>
                     </div>
 
-                    <!-- Right Column (Sidebar) -->
-                    <div class="right-col">
-                         <!-- Skills Section -->
-                         <div class="glass-card sidebar-card fade-in">
-                            <h3><i class="fa-solid fa-gears"></i> Core Skills</h3>
-                            <div class="title-line" style="margin-bottom: 20px; width: 40px;"></div>
-                            <div id="skills-container">
-                                <!-- Injected via app.js -->
-                            </div>
+                    <!-- Projects Section -->
+                    <div class="content-section" style="margin-top: 3rem;">
+                        <div class="section-title fade-in">
+                            <h2><i class="fa-solid fa-rocket"></i> Featured Projects</h2>
+                            <div class="title-line"></div>
                         </div>
-
-                        <!-- Education Section -->
-                        <div class="glass-card sidebar-card fade-in" style="margin-top: 2rem;">
-                            <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
-                            <div class="title-line" style="margin-bottom: 20px; width: 40px;"></div>
-                            <div id="education-list" class="timeline compact">
-                                <!-- Injected via app.js -->
-                            </div>
-                        </div>
-
-                         <!-- Certifications Section -->
-                         <div class="glass-card sidebar-card fade-in" style="margin-top: 2rem;">
-                            <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
-                            <div class="title-line" style="margin-bottom: 20px; width: 40px;"></div>
-                            <ul id="cert-list" class="styled-list">
-                                <!-- Injected via app.js -->
-                            </ul>
+                        <div id="projects-grid" class="repos-grid">
+                            <!-- Injected via app.js -->
                         </div>
                     </div>
                 </div>
+
+                <!-- Right Column (Sidebar) -->
+                <div class="right-col">
+                    <!-- Skills Section -->
+                    <div class="glass-card sidebar-card fade-in">
+                        <h3><i class="fa-solid fa-gears"></i> Technical Stack</h3>
+                        <div id="skills-container">
+                            <!-- Injected via app.js -->
+                        </div>
+                    </div>
+
+                    <!-- Education Section -->
+                    <div class="glass-card sidebar-card fade-in">
+                        <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+                        <div id="education-list" class="timeline">
+                            <!-- Injected via app.js -->
+                        </div>
+                    </div>
+
+                    <!-- Certifications Section -->
+                    <div class="glass-card sidebar-card fade-in">
+                        <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
+                        <ul id="cert-list" class="styled-list">
+                            <!-- Injected via app.js -->
+                        </ul>
+                    </div>
+                </div>
             </div>
-            
+
             <footer class="portfolio-footer">
-                <p>Designed & Built dynamically</p>
+                <p>&copy; 2026 Crafted with Precision by Ambit Misra</p>
+                <p style="margin-top: 8px;">Auto-Syncing with Google Drive & GitHub</p>
             </footer>
-        </section>
+        </div>
     </main>
 
-    <!-- Load Constants first -->
+    <!-- Scripts -->
     <script src="constants.js"></script>
-    <!-- Load App logic -->
     <script src="app.js"></script>
 </body>
 </html>
+
