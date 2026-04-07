@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambit Misra | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Animation Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <main id="app">
+        <!-- Main Portfolio Section -->
+        <section id="portfolio-section" class="active">
+            <nav class="glass-nav">
+                <div class="nav-brand">
+                    <i class="fa-solid fa-code"></i>
+                    <span style="margin-left: 10px; color: var(--text-main); font-size: 1.2rem;" id="nav-name"></span>
+                </div>
+                <div class="nav-links">
+                    <!-- The Drive Link goes here. If updated on drive, users see the latest directly -->
+                    <a id="nav-drive-link" href="#" target="_blank" class="secondary-btn" style="text-decoration: none;">
+                        <i class="fa-brands fa-google-drive"></i> View Resume Docs
+                    </a>
+                </div>
+            </nav>
+
+            <div class="portfolio-container">
+                <!-- Hero Header -->
+                <header class="profile-header glass-card fade-in">
+                    <div class="profile-info">
+                        <h1 id="user-name" class="typewriter glitch" data-text=""></h1>
+                        <p id="user-role" class="tech-text"></p>
+                        <p id="user-summary" class="bio"></p>
+                        
+                        <div class="stats" style="margin-bottom: 25px;">
+                            <div class="stat"><i class="fa-solid fa-location-dot"></i> <span id="user-location"></span></div>
+                            <div class="stat"><i class="fa-solid fa-envelope"></i> <span id="user-email"></span></div>
+                            <div class="stat"><i class="fa-solid fa-phone"></i> <span id="user-phone"></span></div>
+                        </div>
+
+                        <div class="profile-actions">
+                            <a id="user-linkedin" href="#" target="_blank" class="primary-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                            <!-- This will always fetch the live drive docs folder -->
+                            <a id="hero-drive-link" href="#" target="_blank" class="secondary-btn" style="margin-left: 15px; padding: 14px 28px; text-decoration: none;">
+                                <i class="fa-solid fa-cloud-arrow-down"></i> Live Resume Drive
+                            </a>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Two Column Layout: Main Content and Sidebar -->
+                <div class="layout-grid">
+                    <!-- Left Column -->
+                    <div class="left-col">
+                        <!-- Experience Section -->
+                        <div class="content-section">
+                            <div class="section-title fade-in">
+                                <h2><i class="fa-solid fa-briefcase"></i> Work Experience</h2>
+                                <div class="title-line"></div>
+                            </div>
+                            <div id="experience-list" class="timeline">
+                                <!-- Injected via app.js -->
+                            </div>
+                        </div>
+
+                        <!-- Projects Section -->
+                        <div class="content-section" style="margin-top: 4rem;">
+                            <div class="section-title fade-in">
+                                <h2><i class="fa-solid fa-rocket"></i> Key Projects</h2>
+                                <div class="title-line"></div>
+                            </div>
+                            <div id="projects-grid" class="repos-grid">
+                                <!-- Injected via app.js -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column (Sidebar) -->
+                    <div class="right-col">
+                         <!-- Skills Section -->
+                         <div class="glass-card sidebar-card fade-in">
+                            <h3><i class="fa-solid fa-gears"></i> Core Skills</h3>
+                            <div class="title-line" style="margin-bottom: 20px; width: 40px;"></div>
+                            <div id="skills-container">
+                                <!-- Injected via app.js -->
+                            </div>
+                        </div>
+
+                        <!-- Education Section -->
+                        <div class="glass-card sidebar-card fade-in" style="margin-top: 2rem;">
+                            <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+                            <div class="title-line" style="margin-bottom: 20px; width: 40px;"></div>
+                            <div id="education-list" class="timeline compact">
+                                <!-- Injected via app.js -->
+                            </div>
+                        </div>
+
+                         <!-- Certifications Section -->
+                         <div class="glass-card sidebar-card fade-in" style="margin-top: 2rem;">
+                            <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
+                            <div class="title-line" style="margin-bottom: 20px; width: 40px;"></div>
+                            <ul id="cert-list" class="styled-list">
+                                <!-- Injected via app.js -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="portfolio-footer">
+                <p>Designed & Built dynamically</p>
+                <p class="tech-text" style="font-size: 0.8rem; margin-top: 5px;">Always up-to-date with Drive</p>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Load Constants first -->
+    <script src="constants.js"></script>
+    <!-- Load App logic -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+name: Automatically Sync Portfolio to Drive
+
+on:
+  schedule:
+    # Runs automatically every Sunday at midnight
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    # Allows you to manually click "Run workflow" in GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync_and_update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Drive Sync & AI Parsing Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python sync_drive.py
+
+      - name: Check for Changes and Commit
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Only commit if constants.js actually changed
+          if [[ -n $(git status -s constants.js) ]]; then
+            git add constants.js
+            git commit -m "Auto-update constants.js from Google Drive [skip ci]"
+            git push
+            echo "Website updated successfully!"
+          else
+            echo "No changes found in the downloaded resume. Everything is up to date."
+          fi
