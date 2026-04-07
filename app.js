@@ -70,18 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function buildPortfolio(data) {
     if (!data) return;
 
-    // Helper to ensure absolute links (prevents common 'relative path' errors)
-    const ensureAbsolute = (url) => {
-        if (!url || url === '#') return '#';
-        if (url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('tel:')) return url;
-        if (url.startsWith('www.')) return `https://${url}`;
-        // If it looks like a domain or path without protocol, prefix it
-        if (url.includes('.') || url.includes('/')) return `https://${url}`;
-        return url;
-    };
-
     // Set Profile Avatar and GitHub link immediately (reliable shortcut)
     const githubUsername = 'invins2003';
+    
+    // Global helper for absolute links (prevents relative path errors on GitHub Pages)
+    window.ensureAbsolute = (url) => {
+        if (!url || url === '#') return '#';
+        const str = String(url).trim();
+        if (str.startsWith('http') || str.startsWith('mailto:') || str.startsWith('tel:')) return str;
+        if (str.startsWith('www.')) return `https://${str}`;
+        if (str.includes('.') || str.includes('/')) return `https://${str}`;
+        return str;
+    };
+
+    console.log('LinkedIn URL from data:', data.socialLinks.linkedin);
+    console.log('Formatted LinkedIn URL:', ensureAbsolute(data.socialLinks.linkedin));
     document.getElementById('user-avatar').src = `https://github.com/${githubUsername}.png`;
     document.getElementById('user-github').href = `https://github.com/${githubUsername}`;
 
