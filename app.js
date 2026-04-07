@@ -70,6 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function buildPortfolio(data) {
     // Top Nav
     document.getElementById('nav-name').textContent = data.personalInfo.name;
+    
+    // Set Profile Avatar and GitHub link immediately (reliable shortcut)
+    const githubUsername = 'invins2003';
+    document.getElementById('user-avatar').src = `https://github.com/${githubUsername}.png`;
+    document.getElementById('user-github').href = `https://github.com/${githubUsername}`;
 
     // Hero Section
     const nameEl = document.getElementById('user-name');
@@ -84,7 +89,7 @@ function buildPortfolio(data) {
     
     document.getElementById('user-linkedin').href = data.socialLinks.linkedin;
     
-    // Fetch GitHub Profile and Repos
+    // Fetch live GitHub Repository data (can still fail on rate limit, but avatar is now safe)
     fetchGitHubData('invins2003');
 
     // Render Experience Timeline
