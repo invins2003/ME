@@ -1,11 +1,11 @@
 import os
+import requests
 import json
 import glob
 import re
 import gdown
 from PyPDF2 import PdfReader
 from docx import Document
-from google import genai
 
 # Folder ID extracted from the provided Google Drive link
 DRIVE_FOLDER_ID = "1sTYUsVAt_Dr599SsDDaizP3-RjweCfMu"
@@ -44,12 +44,17 @@ def extract_text_from_files():
     return text_content
 
 def process_with_ai(raw_text):
-    print("Sending text to Google Gemini API for parsing...")
+    print("Calling Gemini API via REST (requests)...")
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
-        
-    client = genai.Client(api_key=api_key)
+    
+    # REST URL as per the curl example logic
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    
+    headers = {
+        "Content-Type": "application/json"
+    }
     
     prompt = f"""
     You are an expert data structured parser. Below is the raw extracted text from a user's resume/portfolio PDF.
@@ -60,8 +65,7 @@ def process_with_ai(raw_text):
     {{
       "personalInfo": {{
         "name": "", "role": "", "location": "", "email": "", "phone": "",
-        "summary": "A 2 sentence professional bio",
-        "driveLink": "{DRIVE_LINK}"
+        "summary": "A 2 sentence professional bio"
       }},
       "socialLinks": {{ "linkedin": "", "github": "" }},
       "skills": {{
@@ -83,11 +87,26 @@ def process_with_ai(raw_text):
     {raw_text}
     """
     
-    response = client.models.generate_content(
-        model='gemini-1.5-flash',
-        contents=prompt
-    )
-    response_text = response.text.strip()
+    payload = {
+        "contents": [
+            {
+                "parts": [
+                    {
+                        "text": prompt
+                    }
+                ]
+            }
+        ]
+    }
+    
+    response = requests.post(url, headers=headers, json=payload)
+    result = response.json()
+    
+    if "candidates" not in result:
+        print("API Error Response:", result)
+        raise ValueError(f"Gemini API Error: {result.get('error', {}).get('message', 'Unknown response structure')}")
+        
+    response_text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
     
     # Strip markdown block if it was still added
     if response_text.startswith("```json"):

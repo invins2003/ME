@@ -84,8 +84,8 @@ function buildPortfolio(data) {
     
     document.getElementById('user-linkedin').href = data.socialLinks.linkedin;
     
-    // Fetch GitHub Repos instead of rendering static ones
-    fetchGitHubRepos('invins2003');
+    // Fetch GitHub Profile and Repos
+    fetchGitHubData('invins2003');
 
     // Render Experience Timeline
     const expList = document.getElementById('experience-list');
@@ -163,13 +163,28 @@ function typeWriter(element, text, index) {
     }
 }
 
-async function fetchGitHubRepos(username) {
+async function fetchGitHubData(username) {
     const projGrid = document.getElementById('projects-grid');
     projGrid.innerHTML = '<p class="tech-text" style="grid-column: 1/-1; text-align: center;">Fetching live projects...</p>';
     
     try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`);
-        const repos = await response.json();
+        const [userResp, reposResp] = await Promise.all([
+            fetch(`https://api.github.com/users/${username}`),
+            fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`)
+        ]);
+        
+        const user = await userResp.json();
+        const repos = await reposResp.json();
+
+        // Update Profile Image
+        if (user.avatar_url) {
+            document.getElementById('user-avatar').src = user.avatar_url;
+        }
+        
+        // Update GitHub Link
+        if (user.html_url) {
+            document.getElementById('user-github').href = user.html_url;
+        }
         
         projGrid.innerHTML = '';
         repos.forEach((repo, idx) => {
@@ -198,6 +213,7 @@ async function fetchGitHubRepos(username) {
             projGrid.appendChild(item);
         });
     } catch (err) {
-        projGrid.innerHTML = '<p class="error-msg" style="grid-column: 1/-1;">Failed to load GitHub repositories.</p>';
+        console.error("GitHub API Error:", err);
+        projGrid.innerHTML = '<p class="error-msg" style="grid-column: 1/-1; text-align: center;">Failed to load GitHub repositories.</p>';
     }
 }
