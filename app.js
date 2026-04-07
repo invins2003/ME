@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function buildPortfolio(data) {
     // Top Nav
     document.getElementById('nav-name').textContent = data.personalInfo.name;
-    document.getElementById('nav-drive-link').href = data.personalInfo.driveLink;
 
     // Hero Section
     const nameEl = document.getElementById('user-name');
@@ -84,7 +83,9 @@ function buildPortfolio(data) {
     document.getElementById('user-phone').textContent = data.personalInfo.phone;
     
     document.getElementById('user-linkedin').href = data.socialLinks.linkedin;
-    document.getElementById('hero-drive-link').href = data.personalInfo.driveLink;
+    
+    // Fetch GitHub Repos instead of rendering static ones
+    fetchGitHubRepos('invins2003');
 
     // Render Experience Timeline
     const expList = document.getElementById('experience-list');
@@ -115,31 +116,7 @@ function buildPortfolio(data) {
         eduList.appendChild(item);
     });
 
-    // Render Projects Grid
-    const projGrid = document.getElementById('projects-grid');
-    data.projects.forEach((proj, idx) => {
-        const item = document.createElement('div');
-        item.className = 'repo-card fade-in';
-        item.style.animationDelay = `${0.4 + idx * 0.15}s`;
-        
-        let tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
-        item.innerHTML = `
-            <div>
-                <div class="repo-header">
-                    <h3 class="repo-title">
-                        <i class="fa-solid fa-rocket" style="color: var(--accent-primary)"></i>
-                        <a href="${proj.link}" target="_blank">${proj.title}</a>
-                    </h3>
-                </div>
-                <p class="repo-desc">${proj.description}</p>
-            </div>
-            <div class="repo-footer">
-                ${tagsHtml}
-            </div>
-        `;
-        projGrid.appendChild(item);
-    });
 
     // Render Skills
     const skillsContainer = document.getElementById('skills-container');
@@ -183,5 +160,44 @@ function typeWriter(element, text, index) {
         setTimeout(() => typeWriter(element, text, index + 1), 60);
     } else {
         setTimeout(() => { element.style.borderRight = 'none'; }, 2000);
+    }
+}
+
+async function fetchGitHubRepos(username) {
+    const projGrid = document.getElementById('projects-grid');
+    projGrid.innerHTML = '<p class="tech-text" style="grid-column: 1/-1; text-align: center;">Fetching live projects...</p>';
+    
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`);
+        const repos = await response.json();
+        
+        projGrid.innerHTML = '';
+        repos.forEach((repo, idx) => {
+            const item = document.createElement('div');
+            item.className = 'repo-card fade-in';
+            item.style.animationDelay = `${0.2 + idx * 0.1}s`;
+            
+            const lang = repo.language || "Project";
+            const desc = repo.description || "Source code on GitHub.";
+            
+            item.innerHTML = `
+                <div>
+                    <div class="repo-header">
+                        <h3 class="repo-title">
+                            <i class="fa-solid fa-code-branch" style="color: var(--accent-primary)"></i>
+                            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                        </h3>
+                    </div>
+                    <p class="repo-desc">${desc}</p>
+                </div>
+                <div class="repo-footer">
+                    <span class="tag">${lang}</span>
+                    <span class="tag"><i class="fa-solid fa-star"></i> ${repo.stargazers_count}</span>
+                </div>
+            `;
+            projGrid.appendChild(item);
+        });
+    } catch (err) {
+        projGrid.innerHTML = '<p class="error-msg" style="grid-column: 1/-1;">Failed to load GitHub repositories.</p>';
     }
 }
