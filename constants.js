@@ -5,11 +5,11 @@ const PORTFOLIO_DATA = {
         "location": "Bhubaneswar, Odisha, India",
         "email": "ambitmisra@gmail.com",
         "phone": "8456932901",
-        "summary": "Final-year Computer Science student at GIET University with a strong passion for building cross-platform mobile experiences using Flutter, Android, and Python. I am experienced in integrating IoT devices, REST APIs, and WebSockets to create scalable and user-centric applications."
+        "summary": "I’m a Computer Science graduate from GIET University with a strong passion for software development, especially in Flutter, Android, Python, Java, and Docker. Over the years, I’ve built and contributed to multiple projects that helped me develop practical, industry-ready skills across mobile and backend development."
     },
     "socialLinks": {
-        "linkedin": "www.linkedin.com/in/ambit-misra-5b2202241",
-        "github": ""
+        "linkedin": "https://www.linkedin.com/in/ambit-misra-5b2202241/",
+        "github": "https://github.com/invins2003"
     },
     "skills": {
         "languages": [
