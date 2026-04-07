@@ -1,92 +1,164 @@
 const PORTFOLIO_DATA = {
-    personalInfo: {
-        name: "Ambit Misra",
-        role: "Software & Flutter Developer",
-        location: "Bhubaneswar / Gunupur, Odisha, India",
-        email: "ambitmisra@gmail.com",
-        phone: "+91 8456932901",
-        summary: "Final-year Computer Science student at GIET University with a strong passion for mobile and software development. Experienced in building robust, high-performance applications using Flutter, Android SDK, and Python. Solid foundation in UI/UX design, real-time data communication (WebSockets), and cloud services (Firebase).",
-        driveLink: "https://drive.google.com/drive/folders/1sTYUsVAt_Dr599SsDDaizP3-RjweCfMu?usp=sharing"
+    "personalInfo": {
+        "name": "Ambit Misra",
+        "role": "Flutter Developer",
+        "location": "Bhubaneswar, Odisha, India",
+        "email": "ambitmisra@gmail.com",
+        "phone": "8456932901",
+        "summary": "Final-year Computer Science student at GIET University with a strong passion for building cross-platform mobile experiences using Flutter, Android, and Python. I am experienced in integrating IoT devices, REST APIs, and WebSockets to create scalable and user-centric applications."
     },
-    socialLinks: {
-        linkedin: "https://www.linkedin.com/in/ambit-misra-5b2202241",
-        github: "https://github.com", // Add your Github if available
+    "socialLinks": {
+        "linkedin": "www.linkedin.com/in/ambit-misra-5b2202241",
+        "github": ""
     },
-    skills: {
-        languages: ["Dart", "Java", "Python", "Kotlin", "C", "C++"],
-        frameworks: ["Flutter", "Android SDK", "Jetpack Compose", "Flask"],
-        tools: ["Git", "GitHub", "Docker", "Android Studio", "VS Code", "Firebase"],
-        specialized: ["REST APIs", "WebSocket (STOMP)", "Push Notifications", "UI/UX Design", "Computer Vision", "Generative AI"]
+    "skills": {
+        "languages": [
+            "Dart",
+            "Java",
+            "Python",
+            "Kotlin"
+        ],
+        "frameworks": [
+            "Flutter",
+            "Android SDK",
+            "Jetpack Compose",
+            "Flask",
+            "SpringBoot"
+        ],
+        "tools": [
+            "Git",
+            "GitHub",
+            "Firebase",
+            "Android Studio",
+            "Visual Studio Code",
+            "Docker",
+            "SQLite",
+            "MySQL"
+        ],
+        "specialized": [
+            "REST APIs",
+            "WebSocket (STOMP)",
+            "UI/UX Design",
+            "FCM (Push Notifications)",
+            "IoT Integration",
+            "Generative AI",
+            "Computer Vision"
+        ]
     },
-    experience: [
+    "experience": [
         {
-            role: "Flutter Developer",
-            company: "TechnoClare",
-            duration: "Jul 2024 – Present",
-            description: "Developing cross-platform mobile applications, implementing UI/UX designs, and integrating backend services via REST APIs."
+            "role": "Flutter Developer Intern",
+            "company": "Sodio Technologies",
+            "duration": "December 2025 - Present",
+            "description": "Building mobile applications using the Flutter framework."
         },
         {
-            role: "Freelance Flutter Developer",
-            company: "Sainath Travels",
-            duration: "Aug 2024 – Oct 2024",
-            description: "Developed and delivered a custom mobility and travel management solution."
+            "role": "Flutter Developer",
+            "company": "Visital",
+            "duration": "September 2025 - November 2025",
+            "description": "Collaborated on mobile development projects focused on Flutter."
         },
         {
-            role: "Sales and Marketing Intern",
-            company: "HighRadius",
-            duration: "May 2024 – Jun 2024",
-            description: "Gained insights into enterprise software sales cycles and modern marketing strategies."
+            "role": "Flutter Developer",
+            "company": "TechnoClare",
+            "duration": "July 2024 - May 2025",
+            "description": "Worked on cross-platform application development and project maintenance."
         },
         {
-            role: "Intern Mobile Developer",
-            company: "Artifintel",
-            duration: "Nov 2022 – Jan 2023",
-            description: "Worked on initial stages of mobile application development and UI prototyping."
+            "role": "Sales And Marketing Intern",
+            "company": "HighRadius",
+            "duration": "May 2024 - June 2024",
+            "description": "Gained experience in sales strategies and marketing initiatives."
+        },
+        {
+            "role": "Freelance Flutter Developer",
+            "company": "Sainath Travels",
+            "duration": "August 2024 - October 2024",
+            "description": "Developed custom mobile solutions for client needs."
+        },
+        {
+            "role": "Intern Mobile Developer",
+            "company": "Artifintel",
+            "duration": "December 2021 - January 2022",
+            "description": "Focused on initial learning and development in the mobile space."
         }
     ],
-    projects: [
+    "projects": [
         {
-            title: "Avyakt 3.0 Event Registration App",
-            description: "A techno-fest app built with Jetpack Compose & Flutter to handle large scale event registrations and REST APIs.",
-            link: "https://play.google.com/store/apps/details?id=com.gietu.Avyakt&hl=en",
-            tags: ["Flutter", "Jetpack Compose", "REST API", "Firebase"]
+            "title": "ME",
+            "description": "Source code on GitHub.",
+            "link": "https://github.com/invins2003/ME",
+            "tags": [
+                "JavaScript"
+            ]
         },
         {
-            title: "Shrujan Techno-Cultural App",
-            description: "An interactive app featuring real-time data communication via WebSockets and push notifications through FCM.",
-            link: "https://play.google.com/store/apps/details?id=com.gietu.shrujan&hl=en",
-            tags: ["Flutter", "WebSockets", "FCM"]
+            "title": "OneChat",
+            "description": "Source code on GitHub.",
+            "link": "https://github.com/invins2003/OneChat",
+            "tags": [
+                "C++"
+            ]
         },
         {
-            title: "Vehicle Tracking IoT App",
-            description: "Cross-platform application for real-time monitoring of vehicles using IoT integrations.",
-            link: "#",
-            tags: ["Flutter", "IoT", "REST API"]
+            "title": "TrackMyLocation",
+            "description": "Source code on GitHub.",
+            "link": "https://github.com/invins2003/TrackMyLocation",
+            "tags": [
+                "Dart"
+            ]
         },
         {
-            title: "AI Weather/Web Browser App",
-            description: "Custom native implementations integrating OpenWeatherMap API and web browser functionalities.",
-            link: "#",
-            tags: ["Python", "Android SDK", "API"]
+            "title": "opencv",
+            "description": "Open Source Computer Vision Library",
+            "link": "https://github.com/invins2003/opencv",
+            "tags": [
+                "Project"
+            ]
+        },
+        {
+            "title": "shopEase",
+            "description": "Ecommerce website with React.js, Spring Boot & Tailwind CSS",
+            "link": "https://github.com/invins2003/shopEase",
+            "tags": [
+                "Project"
+            ]
+        },
+        {
+            "title": "Stirling-PDF",
+            "description": "#1 Locally hosted web application that allows you to perform various operations on PDF files",
+            "link": "https://github.com/invins2003/Stirling-PDF",
+            "tags": [
+                "Project"
+            ]
         }
     ],
-    education: [
+    "education": [
         {
-            institution: "GIET University, Gunupur",
-            degree: "Bachelor of Technology in Computer Science",
-            duration: "2021 – 2025"
+            "institution": "GIET University, Gunupur, Odisha",
+            "degree": "Bachelor of Technology in Computer Science",
+            "duration": "December 2021 - May 2025"
         },
         {
-            institution: "KV No. 2, CRPF Campus, Bhubaneswar",
-            degree: "Senior Secondary (Class XII)",
-            duration: "Completed Feb 2021"
+            "institution": "Kendriya Vidyalaya No. 2, CRPF Campus, Bhubaneswar",
+            "degree": "Senior Secondary (Class XII)",
+            "duration": "March 2019 - February 2021"
+        },
+        {
+            "institution": "Kendriya Vidyalaya No. 2, CRPF Campus, Bhubaneswar",
+            "degree": "Secondary (Class X)",
+            "duration": "2017 - February 2019"
         }
     ],
-    certifications: [
-        "Android Development (Nov 2021)",
-        "Python & Flask (Apr 2022)",
-        "GUI with Python (May 2022)",
-        "Wipro TalentNext (Jun 2024)",
-        "Shrujan App Development (Dec 2024)"
+    "certifications": [
+        "Android Development Course (Nov 2021)",
+        "Python and Flask Workshop (Apr 2022)",
+        "GUI with Python Workshop (May 2022)",
+        "Manual Robotics Workshop (Mar 2022)",
+        "Cambridge Capable Program (Jun 2023)",
+        "Wipro TalentNext Program (Jun 2024)",
+        "Python(basics) - HackerRank",
+        "Problem solving(Basics) - HackerRank",
+        "Flutter - Simplilearn"
     ]
 };
