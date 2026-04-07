@@ -4,7 +4,7 @@ import glob
 import re
 import gdown
 from PyPDF2 import PdfReader
-import google.generativeai as genai
+from google import genai
 
 # Folder ID extracted from the provided Google Drive link
 DRIVE_FOLDER_ID = "1sTYUsVAt_Dr599SsDDaizP3-RjweCfMu"
@@ -42,8 +42,7 @@ def process_with_ai(raw_text):
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
         
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-pro-latest')
+    client = genai.Client(api_key=api_key)
     
     prompt = f"""
     You are an expert data structured parser. Below is the raw extracted text from a user's resume/portfolio PDF.
@@ -77,7 +76,10 @@ def process_with_ai(raw_text):
     {raw_text}
     """
     
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model='gemini-1.5-pro',
+        contents=prompt
+    )
     response_text = response.text.strip()
     
     # Strip markdown block if it was still added
