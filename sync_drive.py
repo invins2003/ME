@@ -43,7 +43,7 @@ def process_with_ai(raw_text):
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
         
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-pro')
+    model = genai.GenerativeModel('gemini-1.5-pro-latest')
     
     prompt = f"""
     You are an expert data structured parser. Below is the raw extracted text from a user's resume/portfolio PDF.
