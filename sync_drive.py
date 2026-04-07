@@ -59,7 +59,10 @@ def process_with_ai(raw_text):
         "name": "", "role": "", "location": "", "email": "", "phone": "",
         "summary": "A 2 sentence professional bio"
       }},
-      "socialLinks": {{ "linkedin": "", "github": "" }},
+      "socialLinks": {{ 
+        "linkedin": "Full LinkedIn URL starting with https://", 
+        "github": "Full GitHub URL starting with https://" 
+      }},
       "skills": {{
         "languages": [], "frameworks": [], "tools": [], "specialized": []
       }},

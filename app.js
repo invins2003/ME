@@ -10,8 +10,8 @@ function initCanvas() {
     height = canvas.height = window.innerHeight;
     particles = [];
     const numParticles = Math.floor(width * height / 15000);
-    
-    for(let i = 0; i < numParticles; i++) {
+
+    for (let i = 0; i < numParticles; i++) {
         particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
@@ -25,29 +25,29 @@ function initCanvas() {
 function animateCanvas() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = 'rgba(0, 247, 255, 0.4)';
-    
+
     particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
-        
-        if(p.x < 0) p.x = width;
-        if(p.x > width) p.x = 0;
-        if(p.y < 0) p.y = height;
-        if(p.y > height) p.y = 0;
-        
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
     });
-    
+
     ctx.strokeStyle = 'rgba(0, 247, 255, 0.04)';
-    for(let i = 0; i < particles.length; i++) {
-        for(let j = i + 1; j < particles.length; j++) {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            
-            if(dist < 150) {
+
+            if (dist < 150) {
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
@@ -69,7 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function buildPortfolio(data) {
     if (!data) return;
-    
+
+    // Helper to ensure absolute links (prevents common 'relative path' errors)
+    const ensureAbsolute = (url) => {
+        if (!url || url === '#') return '#';
+        if (url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('tel:')) return url;
+        if (url.startsWith('www.')) return `https://${url}`;
+        // If it looks like a domain or path without protocol, prefix it
+        if (url.includes('.') || url.includes('/')) return `https://${url}`;
+        return url;
+    };
+
     // Set Profile Avatar and GitHub link immediately (reliable shortcut)
     const githubUsername = 'invins2003';
     document.getElementById('user-avatar').src = `https://github.com/${githubUsername}.png`;
@@ -85,9 +95,9 @@ function buildPortfolio(data) {
     document.getElementById('user-location').textContent = data.personalInfo.location;
     document.getElementById('user-email').textContent = data.personalInfo.email;
     document.getElementById('user-phone').textContent = data.personalInfo.phone;
-    
-    document.getElementById('user-linkedin').href = data.socialLinks.linkedin;
-    
+
+    document.getElementById('user-linkedin').href = ensureAbsolute(data.socialLinks.linkedin);
+
     // Using pre-fetched projects from constants.js to avoid browser rate limits
     renderProjects(data.projects);
 
@@ -135,9 +145,9 @@ function buildPortfolio(data) {
         const block = document.createElement('div');
         block.className = 'skill-category fade-in';
         block.style.animationDelay = `${0.2 + idx * 0.1}s`;
-        
+
         let tagsHtml = cat.items.map(t => `<span class="skill-tag">${t}</span>`).join('');
-        
+
         block.innerHTML = `
             <h4>${cat.name}</h4>
             <div class="tags-container">
@@ -170,17 +180,26 @@ function typeWriter(element, text, index) {
 function renderProjects(projects) {
     const projGrid = document.getElementById('projects-grid');
     projGrid.innerHTML = '';
-    
+
     if (!projects || projects.length === 0) {
         projGrid.innerHTML = '<p class="tech-text" style="grid-column: 1/-1; text-align: center;">No projects found.</p>';
         return;
     }
 
+    // Helper to ensure absolute links (duplicated inside for local scope or move to global)
+    const ensureAbsolute = (url) => {
+        if (!url || url === '#') return '#';
+        if (url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('tel:')) return url;
+        if (url.startsWith('www.')) return `https://${url}`;
+        if (url.includes('.') || url.includes('/')) return `https://${url}`;
+        return url;
+    };
+
     projects.forEach((proj, idx) => {
         const item = document.createElement('div');
         item.className = 'repo-card fade-in';
         item.style.animationDelay = `${0.3 + idx * 0.15}s`;
-        
+
         let tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
         item.innerHTML = `
@@ -188,7 +207,7 @@ function renderProjects(projects) {
                 <div class="repo-header">
                     <h3 class="repo-title">
                         <i class="fa-solid fa-code-branch" style="color: var(--accent-primary)"></i>
-                        <a href="${proj.link}" target="_blank">${proj.title}</a>
+                        <a href="${ensureAbsolute(proj.link)}" target="_blank">${proj.title}</a>
                     </h3>
                 </div>
                 <p class="repo-desc">${proj.description}</p>
