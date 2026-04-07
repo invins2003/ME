@@ -2,11 +2,11 @@ import os
 import requests
 import json
 import glob
-import re
 import gdown
 from PyPDF2 import PdfReader
 from docx import Document
 from google import genai
+from google.genai import types
 
 # Folder ID extracted from the provided Google Drive link
 DRIVE_FOLDER_ID = "1sTYUsVAt_Dr599SsDDaizP3-RjweCfMu"
@@ -14,19 +14,15 @@ DRIVE_LINK = "https://drive.google.com/drive/folders/1sTYUsVAt_Dr599SsDDaizP3-Rj
 
 def download_resumes():
     print("Downloading folder from Google Drive...")
-    # Create temp dir
     if not os.path.exists("downloads"):
         os.makedirs("downloads")
     
-    # Download the folder using gdown
-    # This fetches all files in the public folder.
     url = f"https://drive.google.com/drive/folders/{DRIVE_FOLDER_ID}?usp=sharing"
     gdown.download_folder(url, quiet=False, use_cookies=False, output="downloads")
 
 def extract_text_from_files():
     print("Extracting text from downloaded PDFs and Word Docs...")
     text_content = ""
-    # Look for both PDF and DOCX
     files = glob.glob("downloads/**/*.pdf", recursive=True) + glob.glob("downloads/**/*.docx", recursive=True)
     
     for file_path in files:
@@ -50,13 +46,12 @@ def process_with_ai(raw_text):
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
     
-    # Initialize the official GenAI SDK Client
-    client = genai.Client(api_key=api_key)
+    # Force v1beta to ensure compatibility with the latest preview models
+    client = genai.Client(api_key=api_key, http_options={'api_version': 'v1beta'})
     
     prompt = f"""
     You are an expert data structured parser. Below is the raw extracted text from a user's resume/portfolio PDF.
     Please parse all the data and map it EXACTLY into the following JSON format.
-    Return ONLY valid, minified JSON. Do not include markdown codeblocks (no ```json).
     
     JSON Schema Requirements:
     {{
@@ -85,22 +80,17 @@ def process_with_ai(raw_text):
     """
     
     try:
-        # Use the flagship Gemini 1.5 Pro model as requested by user
+        # Use the 2026 Pro model equivalent
         response = client.models.generate_content(
-            model='gemini-1.5-pro',
-            contents=prompt
+            model='gemini-3.1-pro-preview',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type='application/json' # This forces pure JSON output
+            )
         )
         
-        response_text = response.text.strip()
-        
-        # Strip markdown block if it was still added
-        if response_text.startswith("```json"):
-            response_text = response_text[7:]
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
-        
-        # Validate and format JSON
-        parsed_json = json.loads(response_text.strip())
+        # Because we used response_mime_type, we can parse it directly
+        parsed_json = json.loads(response.text.strip())
         return json.dumps(parsed_json)
 
     except Exception as e:
@@ -110,7 +100,7 @@ def process_with_ai(raw_text):
 def rewrite_constants(json_payload):
     print("Updating constants.js with live data...")
     file_content = f"const PORTFOLIO_DATA = {json_payload};\n"
-    with open("constants.js", "w") as f:
+    with open("constants.js", "w", encoding="utf-8") as f:
         f.write(file_content)
     print("Update successful!")
 
