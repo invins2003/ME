@@ -51,7 +51,7 @@ def process_with_ai(raw_text):
         raise ValueError("GEMINI_API_KEY environment variable is not set. Check your GitHub Secrets.")
     
     # Upgraded to Gemini 3.1 Pro for state-of-the-art accuracy
-    url = "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-pro:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent"
     
     headers = {
         "Content-Type": "application/json",
