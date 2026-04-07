@@ -4,6 +4,7 @@ import glob
 import re
 import gdown
 from PyPDF2 import PdfReader
+from docx import Document
 from google import genai
 
 # Folder ID extracted from the provided Google Drive link
@@ -21,18 +22,24 @@ def download_resumes():
     url = f"https://drive.google.com/drive/folders/{DRIVE_FOLDER_ID}?usp=sharing"
     gdown.download_folder(url, quiet=False, use_cookies=False, output="downloads")
 
-def extract_text_from_pdfs():
-    print("Extracting text from downloaded PDFs...")
+def extract_text_from_files():
+    print("Extracting text from downloaded PDFs and Word Docs...")
     text_content = ""
-    pdf_files = glob.glob("downloads/**/*.pdf", recursive=True)
+    # Look for both PDF and DOCX
+    files = glob.glob("downloads/**/*.pdf", recursive=True) + glob.glob("downloads/**/*.docx", recursive=True)
     
-    for pdf_file in pdf_files:
+    for file_path in files:
         try:
-            reader = PdfReader(pdf_file)
-            for page in reader.pages:
-                text_content += page.extract_text() + "\n"
+            if file_path.endswith(".pdf"):
+                reader = PdfReader(file_path)
+                for page in reader.pages:
+                    text_content += (page.extract_text() or "") + "\n"
+            elif file_path.endswith(".docx"):
+                doc = Document(file_path)
+                for para in doc.paragraphs:
+                    text_content += para.text + "\n"
         except Exception as e:
-            print(f"Failed to parse {pdf_file}: {e}")
+            print(f"Failed to parse {file_path}: {e}")
             
     return text_content
 
@@ -77,7 +84,7 @@ def process_with_ai(raw_text):
     """
     
     response = client.models.generate_content(
-        model='gemini-1.5-pro',
+        model='gemini-1.5-flash',
         contents=prompt
     )
     response_text = response.text.strip()
@@ -107,7 +114,7 @@ def rewrite_constants(json_data_str):
 def main():
     try:
         download_resumes()
-        text = extract_text_from_pdfs()
+        text = extract_text_from_files()
         if not text.strip():
             print("No text could be extracted from the drive link. Aborting.")
             return

@@ -1,3 +1,4 @@
 google-genai
 PyPDF2==3.0.1
 gdown==5.1.0
+python-docx==1.1.0
