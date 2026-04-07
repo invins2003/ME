@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmbitDev Workspace | IDE</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workspace.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Word Conversion Lib -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+
+    <!-- macOS Window Wrapper -->
+    <div class="monterey-window glass-panel">
+        <!-- Titlebar (Mac Style) -->
+        <header class="window-titlebar">
+            <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+            </div>
+            <div class="window-info">
+                <i class="fa-solid fa-file-pen"></i>
+                <span class="file-path">AmbitDev / Workspace / <span id="active-tab-name">untitled_note.md</span></span>
+            </div>
+            <div class="window-actions">
+                <input type="file" id="word-upload" accept=".docx" style="display: none;">
+                <button class="primary-btn sm-btn word-btn" id="import-word-btn"><i class="fa-solid fa-file-word"></i> Import .docx</button>
+                <button class="primary-btn sm-btn" id="dl-md-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Export .md</button>
+            </div>
+        </header>
+
+        <div class="ide-container">
+            <!-- Sidebar (macOS Slim Dock) -->
+            <aside class="activity-bar dock-panel">
+                <div class="top-icons">
+                    <div class="nav-button active" data-app="markdown" title="Writing Studio">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+                </div>
+                <div class="bottom-icons">
+                    <a href="index.html" class="nav-button exit-btn" title="Exit Workspace">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Editor Area -->
+            <main class="editor-area">
+                <div class="editor-toolbar premium-ribbon">
+                    <div class="toolbar-group">
+                        <button class="tool-btn" data-format="bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                        <button class="tool-btn" data-format="italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                    </div>
+                    <div class="toolbar-divider"></div>
+                    <div class="toolbar-group">
+                        <button class="tool-btn" data-format="h1" title="H1">H1</button>
+                        <button class="tool-btn" data-format="h2" title="H2">H2</button>
+                    </div>
+                    <div class="toolbar-divider"></div>
+                    <div class="toolbar-group">
+                        <button class="tool-btn" data-format="link" title="Link"><i class="fa-solid fa-link"></i></button>
+                        <button class="tool-btn" data-format="list" title="List"><i class="fa-solid fa-list"></i></button>
+                    </div>
+                    <div class="toolbar-divider"></div>
+                    <div class="toolbar-group font-controls">
+                        <select id="font-size-select" title="Normal Text Size" class="premium-select">
+                            <option value="0.9rem">Small</option>
+                            <option value="1.05rem" selected>Medium</option>
+                            <option value="1.2rem">Large</option>
+                            <option value="1.4rem">XL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="workspace-viewport">
+                    <div class="editor-grid">
+                        <div class="editor-pane visual-side">
+                            <div class="pane-label-vibrant">Visual Writing Canvas</div>
+                            <div class="word-sheet-container">
+                                <div id="md-input" class="rich-editor" contenteditable="true" spellcheck="false">
+                                    <h1>Untitled Creation</h1>
+                                    <p>Start your design here. <b>Bold</b> and <i>Italic</i> supported.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="editor-pane console-side">
+                            <div class="pane-label-vibrant">Real-time Markdown Sync</div>
+                            <div class="code-output-pane glass-console">
+                                <pre><code id="md-code-display"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Terminal (Sleek Mac Terminal) -->
+                <footer class="terminal glass-terminal">
+                    <div class="terminal-body" id="terminal-output">
+                        <!-- Logs here -->
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="workspace.js?v=1.0.6"></script>
+</body>
+</html>

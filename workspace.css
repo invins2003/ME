@@ -1,0 +1,303 @@
+/* Monterey Premium UI - Glassmorphism 2.0 + Word Visuals */
+:root {
+    --mac-bg: #030712;
+    --mac-glass: rgba(17, 24, 39, 0.55);
+    --mac-border: rgba(255, 255, 255, 0.12);
+    --mac-accent: #00f7ff;
+    --mac-red: #ff5f56;
+    --mac-yellow: #ffbd2e;
+    --mac-green: #27c93f;
+    --sheet-bg: #fcfcfc;
+    --sheet-text: #111827;
+    --dock-bg: rgba(255, 255, 255, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at 0% 0%, #0f172a 0%, #020617 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+    padding: 30px;
+}
+
+/* Premium Window (Glass 2.0) */
+.monterey-window {
+    width: 100%;
+    height: 100%;
+    background: var(--mac-glass);
+    backdrop-filter: blur(45px) saturate(190%);
+    -webkit-backdrop-filter: blur(45px) saturate(190%);
+    border: 1px solid var(--mac-border);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+}
+
+.ide-container {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Redesigned Titlebar */
+.window-titlebar {
+    height: 52px;
+    background: rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--mac-border);
+    justify-content: space-between;
+}
+
+.traffic-lights { display: flex; gap: 8px; }
+.light { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 1px 1px rgba(0,0,0,0.1); }
+.light.red { background: var(--mac-red); }
+.light.yellow { background: var(--mac-yellow); }
+.light.green { background: var(--mac-green); }
+
+.window-info {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.window-info i { color: var(--mac-accent); }
+.file-path { opacity: 0.5; }
+
+.word-btn {
+    background: rgba(43, 87, 154, 0.2) !important;
+    border: 1px solid rgba(43, 87, 154, 0.4) !important;
+    color: #9ab4f5 !important;
+    margin-right: 8px;
+}
+.word-btn:hover {
+    background: rgba(43, 87, 154, 0.4) !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(43, 87, 154, 0.3) !important;
+}
+
+/* Main Editor Area Wrapper */
+.editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(0,0,0,0.02);
+}
+
+/* The Floating Dock Sidebar */
+.dock-panel {
+    width: 72px;
+    background: var(--dock-bg);
+    margin: 15px;
+    border-radius: 20px;
+    border: 1px solid var(--mac-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    justify-content: space-between;
+}
+
+.nav-button {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-button:hover, .nav-button.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.exit-btn:hover { color: #ff4d4d; }
+
+/* Premium Toolbar Ribbon */
+.premium-ribbon {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mac-border);
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.toolbar-group {
+    display: flex;
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.tool-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: rgba(255,255,255,0.7);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+}
+
+.tool-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--mac-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,247,255,0.2);
+}
+
+.tool-btn:active {
+    transform: translateY(0);
+    background: rgba(255,255,255,0.05);
+}
+
+.toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 8px;
+}
+
+.premium-select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.premium-select:hover { border-color: var(--mac-accent); background: rgba(255,255,255,0.1); }
+
+/* Centered Writing Viewport */
+.workspace-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    height: 100%;
+    align-items: start;
+}
+
+.visual-side { display: flex; flex-direction: column; align-items: center; }
+
+/* The Word Sheet (with texture) */
+.word-sheet-container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--sheet-bg);
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+    min-height: 1000px;
+    padding: 80px 100px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    position: relative;
+    transition: font-size 0.2s ease;
+}
+
+.pane-label-vibrant {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--mac-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.rich-editor {
+    color: var(--sheet-text);
+    outline: none;
+    min-height: 800px;
+    line-height: 1.6;
+}
+
+.rich-editor h1 { font-size: 2.2rem; color: #000; margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; }
+.rich-editor h2 { font-size: 1.6rem; color: #333; margin-top: 1.5rem; }
+.rich-editor p { margin-bottom: 1rem; }
+
+/* Glass Console Output */
+.glass-console {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--mac-border);
+    border-radius: 12px;
+    padding: 24px;
+    height: 75vh;
+    overflow: auto;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+    position: sticky;
+    top: 0;
+}
+
+.glass-console code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: #4ade80;
+    line-height: 1.5;
+}
+
+/* Re-styled Terminal Log */
+.glass-terminal {
+    height: 110px;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid var(--mac-border);
+    padding: 12px 20px;
+}
+
+.terminal-body {
+    height: 100%;
+    overflow-y: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+}
+
+.prompt { color: var(--mac-accent); font-weight: 600; margin-right: 8px; }
+.line { margin-bottom: 4px; color: #94a3b8; }
+
+/* Custom Scrollbars */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
