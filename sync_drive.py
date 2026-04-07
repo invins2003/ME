@@ -131,6 +131,25 @@ def rewrite_constants(json_data_str):
         f.write(file_content)
     print("Update successful!")
 
+def fetch_github_repos(username):
+    print(f"Fetching GitHub repositories for {username}...")
+    url = f"https://api.github.com/users/{username}/repos?sort=stars&per_page=6"
+    try:
+        response = requests.get(url)
+        repos = response.json()
+        formatted_projects = []
+        for repo in repos:
+            formatted_projects.append({
+                "title": repo.get("name"),
+                "description": repo.get("description") or "Source code on GitHub.",
+                "link": repo.get("html_url"),
+                "tags": [repo.get("language") or "Project"]
+            })
+        return formatted_projects
+    except Exception as e:
+        print(f"Failed to fetch GitHub repos: {e}")
+        return []
+
 def main():
     try:
         download_resumes()
@@ -139,8 +158,15 @@ def main():
             print("No text could be extracted from the drive link. Aborting.")
             return
             
-        json_data = process_with_ai(text)
-        rewrite_constants(json_data)
+        json_data_str = process_with_ai(text)
+        json_data = json.loads(json_data_str)
+        
+        # Inject live GitHub data into the JSON
+        github_username = "invins2003"
+        json_data["projects"] = fetch_github_repos(github_username)
+        
+        # Save back to constants.js
+        rewrite_constants(json.dumps(json_data, indent=4))
     except Exception as e:
         print(f"Workflow failed: {e}")
         exit(1)

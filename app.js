@@ -89,8 +89,8 @@ function buildPortfolio(data) {
     
     document.getElementById('user-linkedin').href = data.socialLinks.linkedin;
     
-    // Fetch live GitHub Repository data (can still fail on rate limit, but avatar is now safe)
-    fetchGitHubData('invins2003');
+    // Using pre-fetched projects from constants.js to avoid browser rate limits
+    renderProjects(data.projects);
 
     // Render Experience Timeline
     const expList = document.getElementById('experience-list');
@@ -166,6 +166,40 @@ function typeWriter(element, text, index) {
     } else {
         setTimeout(() => { element.style.borderRight = 'none'; }, 2000);
     }
+}
+
+function renderProjects(projects) {
+    const projGrid = document.getElementById('projects-grid');
+    projGrid.innerHTML = '';
+    
+    if (!projects || projects.length === 0) {
+        projGrid.innerHTML = '<p class="tech-text" style="grid-column: 1/-1; text-align: center;">No projects found.</p>';
+        return;
+    }
+
+    projects.forEach((proj, idx) => {
+        const item = document.createElement('div');
+        item.className = 'repo-card fade-in';
+        item.style.animationDelay = `${0.3 + idx * 0.15}s`;
+        
+        let tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+
+        item.innerHTML = `
+            <div>
+                <div class="repo-header">
+                    <h3 class="repo-title">
+                        <i class="fa-solid fa-code-branch" style="color: var(--accent-primary)"></i>
+                        <a href="${proj.link}" target="_blank">${proj.title}</a>
+                    </h3>
+                </div>
+                <p class="repo-desc">${proj.description}</p>
+            </div>
+            <div class="repo-footer">
+                ${tagsHtml}
+            </div>
+        `;
+        projGrid.appendChild(item);
+    });
 }
 
 async function fetchGitHubData(username) {
