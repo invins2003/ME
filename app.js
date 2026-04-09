@@ -192,11 +192,22 @@ function initCursor() {
 
     // Event Delegation for hover effects - more robust for dynamic/modal content
     document.addEventListener('mouseover', (e) => {
-        const target = e.target.closest('a, button, .repo-card, .timeline-item, .skill-tag, .palette-item, #palette-search');
+        const target = e.target.closest('a, button, .repo-card, .timeline-item, .skill-tag, .palette-item, #palette-search, .showcase-container');
         if (target) {
             cursor.classList.add('hover');
+            
+            // Theme-aware cursor color
+            if (target.closest('.green-theme')) {
+                cursor.style.borderColor = '#22c55e';
+                cursor.style.boxShadow = '0 0 15px rgba(34, 197, 94, 0.4)';
+            } else {
+                cursor.style.borderColor = 'var(--accent-primary)';
+                cursor.style.boxShadow = '0 0 15px var(--accent-glow)';
+            }
         } else {
             cursor.classList.remove('hover');
+            cursor.style.borderColor = 'var(--accent-primary)';
+            cursor.style.boxShadow = '0 0 15px var(--accent-glow)';
         }
     });
 }
@@ -599,7 +610,8 @@ function getProjectIcon(name) {
         'ME': 'fa-user-astronaut',
         'shopEase': 'fa-cart-shopping',
         'TrackMyLocation': 'fa-location-crosshairs',
-        'V-Notes': 'fa-note-sticky'
+        'AimSense': 'fa-crosshairs',
+        'AmbitDev Workspace': 'fa-code'
     };
     return icons[name] || 'fa-rocket';
 }
@@ -607,6 +619,27 @@ function getProjectIcon(name) {
 function getAppTemplate(proj) {
     const type = proj.title.toLowerCase();
     
+    if (type.includes('aimsense')) {
+        return `
+            <div class="dashboard-loading">
+                <p class="app-title" style="font-size: 0.8rem; margin-bottom: 15px; color: #22c55e;">TRAINING_ARENA.EXE</p>
+                <div class="list-item" style="border-left-color: #22c55e;">
+                    <span class="list-item-title">Last Reaction</span>
+                    <span class="list-item-status">184ms</span>
+                </div>
+                <div class="list-item" style="border-left-color: #22c55e;">
+                    <span class="list-item-title">Accuracy</span>
+                    <span class="list-item-status">98.2%</span>
+                </div>
+                <div style="margin-top: 20px; height: 60px; background: rgba(34, 197, 94, 0.1); border: 1px dashed #22c55e; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: #22c55e;">
+                    [ PERFORMANCE GRAPH PLACEHOLDER ]
+                </div>
+                <button class="primary-btn" style="width: 100%; border-color: #22c55e; color: #22c55e; font-size: 0.65rem; padding: 10px; margin-top: 15px; background: rgba(34,197,94,0.05)">
+                    START TRAINING
+                </button>
+            </div>
+        `;
+    }
     if (type.includes('chat')) {
         return `
             <div class="chat-container">

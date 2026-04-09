@@ -87,8 +87,29 @@ const PORTFOLIO_DATA = {
     ],
     "projects": [
         {
+            "title": "AimSense",
+            "description": "Professional-grade FPS training arena with real-time reaction tracking and global leaderboards. Built for precision training.",
+            "link": "https://aimsense-4d2c6.web.app/",
+            "tags": [
+                "React",
+                "Firebase",
+                "Framer Motion",
+                "Tailwind"
+            ]
+        },
+        {
+            "title": "AmbitDev Workspace",
+            "description": "Premium macOS-inspired Markdown editor with Word-to-MD conversion and real-time synchronization.",
+            "link": "workspace.html",
+            "tags": [
+                "JavaScript",
+                "CSS3",
+                "HTML5"
+            ]
+        },
+        {
             "title": "ME",
-            "description": "Source code on GitHub.",
+            "description": "Source code for this professional portfolio site.",
             "link": "https://github.com/invins2003/ME",
             "tags": [
                 "JavaScript"
@@ -96,7 +117,7 @@ const PORTFOLIO_DATA = {
         },
         {
             "title": "OneChat",
-            "description": "Source code on GitHub.",
+            "description": "Cross-platform chat application with real-time socket architecture.",
             "link": "https://github.com/invins2003/OneChat",
             "tags": [
                 "C++"
@@ -104,34 +125,19 @@ const PORTFOLIO_DATA = {
         },
         {
             "title": "TrackMyLocation",
-            "description": "Source code on GitHub.",
+            "description": "Real-time location tracking system with IoT integration capabilities.",
             "link": "https://github.com/invins2003/TrackMyLocation",
             "tags": [
                 "Dart"
             ]
         },
         {
-            "title": "opencv",
-            "description": "Open Source Computer Vision Library",
-            "link": "https://github.com/invins2003/opencv",
-            "tags": [
-                "Project"
-            ]
-        },
-        {
             "title": "shopEase",
-            "description": "Ecommerce website with React.js, Spring Boot & Tailwind CSS",
+            "description": "Feature-rich Ecommerce platform with Spring Boot and React.",
             "link": "https://github.com/invins2003/shopEase",
             "tags": [
-                "Project"
-            ]
-        },
-        {
-            "title": "Stirling-PDF",
-            "description": "#1 Locally hosted web application that allows you to perform various operations on PDF files",
-            "link": "https://github.com/invins2003/Stirling-PDF",
-            "tags": [
-                "Project"
+                "Spring Boot",
+                "React"
             ]
         }
     ],
