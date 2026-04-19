@@ -4,12 +4,12 @@ const PORTFOLIO_DATA = {
         "role": "Flutter Developer",
         "location": "Bhubaneswar, Odisha, India",
         "email": "ambitmisra@gmail.com",
-        "phone": "8456932901",
-        "summary": "I am a Computer Science graduate from GIET University with a passion for software development, focusing on building mobile applications using Flutter and Android SDK. I have extensive experience in cross-platform development, backend integration, and containerization through academic and freelance projects."
+        "phone": "+91 8456932901",
+        "summary": "Ambit Misra is a Computer Science graduate from GIET University specializing in Flutter, Android, and backend development with Python and Java. He has extensive experience building cross-platform applications and integrating technologies like IoT, Docker, and REST APIs."
     },
     "socialLinks": {
         "linkedin": "https://www.linkedin.com/in/ambit-misra-5b2202241",
-        "github": "#"
+        "github": ""
     },
     "skills": {
         "languages": [
@@ -22,30 +22,30 @@ const PORTFOLIO_DATA = {
             "Flutter",
             "Android SDK",
             "Flask",
-            "Django",
+            "SpringBoot",
+            "Jetpack Compose",
             "FastAPI",
-            "Spring Boot",
-            "Jetpack Compose"
+            "Django"
         ],
         "tools": [
             "Git",
             "GitHub",
-            "Firebase",
             "Docker",
+            "Firebase",
             "Android Studio",
             "VS Code",
             "SQLite",
             "MySQL",
-            "Postman"
+            "Firebase Firestore"
         ],
         "specialized": [
             "REST APIs",
-            "WebSocket",
-            "STOMP",
+            "WebSocket (STOMP protocol)",
             "UI/UX Design",
             "IoT",
-            "Generative AI",
             "Computer Vision",
+            "Generative AI",
+            "SDLC",
             "Agile Methodologies"
         ]
     },
@@ -54,37 +54,37 @@ const PORTFOLIO_DATA = {
             "role": "Flutter Developer intern",
             "company": "Sodio Technologies",
             "duration": "December 2025 - Present",
-            "description": "Building powerful mobile experiences using Flutter for diverse applications."
+            "description": "Engaged in professional mobile app development focusing on cross-platform solutions."
         },
         {
             "role": "Flutter Developer",
             "company": "Visital",
             "duration": "September 2025 - November 2025",
-            "description": "Contributed to mobile application development in a professional studio setting."
+            "description": "Worked as a Flutter developer contributing to mobile projects in Bhubaneswar."
         },
         {
             "role": "Flutter Developer",
             "company": "TechnoClare",
             "duration": "July 2024 - May 2025",
-            "description": "Focused on building and optimizing cross-platform mobile applications."
+            "description": "Developed cross-platform mobile applications focusing on performance and user experience."
         },
         {
-            "role": "Flutter Developer (Freelancer)",
+            "role": "Freelance Flutter Developer",
             "company": "Sainath Travels",
             "duration": "August 2024 - October 2024",
-            "description": "Developed specialized mobile solutions for travel management."
+            "description": "Developed custom mobile solutions on a freelance basis."
         },
         {
             "role": "Sales And Marketing Intern",
             "company": "HighRadius",
             "duration": "May 2024 - June 2024",
-            "description": "Engaged in professional sales and marketing strategies for fintech solutions."
+            "description": "Gained experience in corporate sales, marketing, and cross-functional collaboration."
         },
         {
             "role": "Intern Mobile Developer",
             "company": "Artifintel",
             "duration": "November 2022 - January 2023",
-            "description": "Gained early hands-on experience in mobile application development workflows."
+            "description": "Focused on initial mobile development tasks and learning the development lifecycle."
         }
     ],
     "projects": [
@@ -121,17 +121,17 @@ const PORTFOLIO_DATA = {
             ]
         },
         {
-            "title": "shopEase",
-            "description": "Ecommerce website with React.js, Spring Boot & Tailwind CSS",
-            "link": "https://github.com/invins2003/shopEase",
+            "title": "HRM",
+            "description": "Source code on GitHub.",
+            "link": "https://github.com/invins2003/HRM",
             "tags": [
-                "Project"
+                "Dart"
             ]
         },
         {
-            "title": "Stirling-PDF",
-            "description": "#1 Locally hosted web application that allows you to perform various operations on PDF files",
-            "link": "https://github.com/invins2003/Stirling-PDF",
+            "title": "shopEase",
+            "description": "Ecommerce website with React.js, Spring Boot & Tailwind CSS",
+            "link": "https://github.com/invins2003/shopEase",
             "tags": [
                 "Project"
             ]
@@ -139,30 +139,31 @@ const PORTFOLIO_DATA = {
     ],
     "education": [
         {
-            "institution": "GIET University Gunupur",
+            "institution": "GIET University, Gunupur",
             "degree": "Bachelor of Technology - BTech, Computer Science",
-            "duration": "2021 - 2025"
+            "duration": "December 2021 - May 2025"
         },
         {
             "institution": "Kendriya Vidyalaya No. 2 CRPF Campus, Bhubaneswar",
             "degree": "Pre-University (Class XII)",
-            "duration": "2019 - 2021"
+            "duration": "June 2019 - August 2021"
         },
         {
             "institution": "Kendriya Vidyalaya No. 2 CRPF Campus, Bhubaneswar",
-            "degree": "Matriculation (Class X)",
-            "duration": "2017 - 2019"
+            "degree": "Matriculations (Class X)",
+            "duration": "2017 - February 2019"
         }
     ],
     "certifications": [
-        "Python (basics) - HackerRank",
-        "Problem solving (Basics) - HackerRank",
+        "Python(basics) - HackerRank",
+        "Problem solving(Basics) - HackerRank",
         "Flutter - Simplilearn",
         "Android Development Course (Nov 2021)",
-        "Python and Flask Workshop - GDSC",
-        "GUI with Python Workshop - DSC GIETU",
-        "Manual Robotics Workshop - SARS Club GIETU",
-        "Cambridge Capable Program - Cambridge University",
-        "Wipro TalentNext Program (Jun 2024)"
+        "Python and Flask Workshop - GDSC and Coding Ninjas (Apr 2022)",
+        "GUI with Python Workshop - DSC GIETU (May 2022)",
+        "Manual Robotics Workshop - SARS Club GIETU (Mar 2022)",
+        "Cambridge Capable Program - Cambridge University (Jun 2023)",
+        "Wipro TalentNext Program (Jun 2024)",
+        "Developed Shrujan Application Certification - GIETU (Dec 2025)"
     ]
 };
