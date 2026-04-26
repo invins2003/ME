@@ -5,46 +5,47 @@ const PORTFOLIO_DATA = {
         "location": "Bhubaneswar, Odisha, India",
         "email": "ambitmisra@gmail.com",
         "phone": "+91 8456932901",
-        "summary": "Ambit Misra is a Computer Science graduate from GIET University specializing in Flutter, Android, and backend development with Python and Java. He has extensive experience building cross-platform applications and integrating technologies like IoT, Docker, and REST APIs."
+        "summary": "Computer Science graduate from GIET University with a strong passion for software development, especially in Flutter, Android, and backend technologies. I have hands-on experience building cross-platform applications and integrating IoT solutions to solve real-world problems."
     },
     "socialLinks": {
-        "linkedin": "https://www.linkedin.com/in/ambit-misra-5b2202241",
+        "linkedin": "https://linkedin.com/in/ambit-misra-5b2202241",
         "github": ""
     },
     "skills": {
         "languages": [
-            "Java",
-            "Kotlin",
             "Dart",
-            "Python"
+            "Java",
+            "Python",
+            "Kotlin",
+            "SQL"
         ],
         "frameworks": [
             "Flutter",
             "Android SDK",
-            "Flask",
-            "SpringBoot",
             "Jetpack Compose",
-            "FastAPI",
-            "Django"
+            "Flask",
+            "Spring Boot",
+            "Django",
+            "FastAPI"
         ],
         "tools": [
             "Git",
             "GitHub",
-            "Docker",
             "Firebase",
+            "Docker",
             "Android Studio",
             "VS Code",
             "SQLite",
-            "MySQL",
             "Firebase Firestore"
         ],
         "specialized": [
             "REST APIs",
-            "WebSocket (STOMP protocol)",
+            "WebSocket",
+            "STOMP protocol",
+            "IoT Integration",
             "UI/UX Design",
-            "IoT",
-            "Computer Vision",
             "Generative AI",
+            "Computer Vision",
             "SDLC",
             "Agile Methodologies"
         ]
@@ -54,37 +55,37 @@ const PORTFOLIO_DATA = {
             "role": "Flutter Developer intern",
             "company": "Sodio Technologies",
             "duration": "December 2025 - Present",
-            "description": "Engaged in professional mobile app development focusing on cross-platform solutions."
+            "description": "Building mobile applications using Flutter and exploring modern development practices in a professional environment."
         },
         {
             "role": "Flutter Developer",
             "company": "Visital",
             "duration": "September 2025 - November 2025",
-            "description": "Worked as a Flutter developer contributing to mobile projects in Bhubaneswar."
+            "description": "Focused on Flutter development and mobile application enhancement for the Bhubaneswar-based team."
         },
         {
             "role": "Flutter Developer",
             "company": "TechnoClare",
             "duration": "July 2024 - May 2025",
-            "description": "Developed cross-platform mobile applications focusing on performance and user experience."
+            "description": "Contributed to cross-platform mobile application projects focusing on performance and user experience."
         },
         {
-            "role": "Freelance Flutter Developer",
+            "role": "Freelancer Flutter Developer",
             "company": "Sainath Travels",
             "duration": "August 2024 - October 2024",
-            "description": "Developed custom mobile solutions on a freelance basis."
+            "description": "Developed specialized mobile solutions as a freelance developer."
         },
         {
             "role": "Sales And Marketing Intern",
             "company": "HighRadius",
             "duration": "May 2024 - June 2024",
-            "description": "Gained experience in corporate sales, marketing, and cross-functional collaboration."
+            "description": "Gained experience in sales, marketing, and cross-functional collaboration within a corporate environment."
         },
         {
             "role": "Intern Mobile Developer",
             "company": "Artifintel",
             "duration": "November 2022 - January 2023",
-            "description": "Focused on initial mobile development tasks and learning the development lifecycle."
+            "description": "Hands-on internship focusing on mobile app development fundamentals and project support."
         }
     ],
     "projects": [
@@ -139,31 +140,31 @@ const PORTFOLIO_DATA = {
     ],
     "education": [
         {
-            "institution": "GIET University, Gunupur",
-            "degree": "Bachelor of Technology - BTech, Computer Science",
+            "institution": "GIET University, Gunupur, Odisha",
+            "degree": "Bachelor of Technology in Computer Science",
             "duration": "December 2021 - May 2025"
         },
         {
-            "institution": "Kendriya Vidyalaya No. 2 CRPF Campus, Bhubaneswar",
+            "institution": "Kendriya Vidyalaya No. 2, CRPF Campus, Bhubaneswar",
             "degree": "Pre-University (Class XII)",
-            "duration": "June 2019 - August 2021"
+            "duration": "June 2019 - February 2021"
         },
         {
-            "institution": "Kendriya Vidyalaya No. 2 CRPF Campus, Bhubaneswar",
+            "institution": "Kendriya Vidyalaya No. 2, Bhubaneswar",
             "degree": "Matriculations (Class X)",
-            "duration": "2017 - February 2019"
+            "duration": "February 2017 - February 2019"
         }
     ],
     "certifications": [
         "Python(basics) - HackerRank",
         "Problem solving(Basics) - HackerRank",
-        "Flutter - Simplilearn",
-        "Android Development Course (Nov 2021)",
-        "Python and Flask Workshop - GDSC and Coding Ninjas (Apr 2022)",
-        "GUI with Python Workshop - DSC GIETU (May 2022)",
-        "Manual Robotics Workshop - SARS Club GIETU (Mar 2022)",
-        "Cambridge Capable Program - Cambridge University (Jun 2023)",
-        "Wipro TalentNext Program (Jun 2024)",
-        "Developed Shrujan Application Certification - GIETU (Dec 2025)"
+        "Flutter Certification - Simplilearn",
+        "Android Development Course",
+        "Python and Flask Workshop (GDSC and Coding Ninjas)",
+        "GUI with Python Workshop (DSC GIETU)",
+        "Manual Robotics Workshop (SARS Club GIETU)",
+        "Cambridge Capable Program (Cambridge University)",
+        "Wipro TalentNext Program",
+        "Developed Shrujan Application (GIETU)"
     ]
 };
