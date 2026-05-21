@@ -1,11 +1,11 @@
 const PORTFOLIO_DATA = {
     "personalInfo": {
         "name": "Ambit Misra",
-        "role": "Flutter Developer | Aspiring Full-Stack Android Engineer",
+        "role": "Flutter Developer",
         "location": "Bhubaneswar, Odisha, India",
         "email": "ambitmisra@gmail.com",
-        "phone": "8456932901",
-        "summary": "Computer Science graduate from GIET University with a strong passion for mobile and backend development using Flutter, Android, Python, and Java. Experienced in building scalable applications, integrating REST APIs, and utilizing Docker for containerized workflows."
+        "phone": "+91 8456932901",
+        "summary": "Ambit Misra is a Computer Science graduate specializing in Flutter and Android development with a focus on building scalable mobile and backend solutions. He has extensive experience in integrating REST APIs, WebSockets, and containerized workflows to deliver high-quality software."
     },
     "socialLinks": {
         "linkedin": "https://www.linkedin.com/in/ambit-misra-5b2202241",
@@ -16,66 +16,72 @@ const PORTFOLIO_DATA = {
             "Dart",
             "Java",
             "Python",
-            "Kotlin"
+            "Kotlin",
+            "JavaScript",
+            "TypeScript",
+            "SQL",
+            "HTML/CSS"
         ],
         "frameworks": [
             "Flutter",
             "Android SDK",
+            "Firebase",
+            "Node.js",
+            "Express.js",
             "Flask",
-            "Jetpack Compose",
             "SpringBoot",
-            "Django",
-            "FastAPI"
+            "Capacitor",
+            "Jetpack Compose"
         ],
         "tools": [
             "Git",
             "GitHub",
-            "Firebase",
-            "Docker",
             "Android Studio",
-            "Visual Studio Code",
-            "SQLite"
+            "VS Code",
+            "Postman",
+            "Docker",
+            "Figma",
+            "Jira"
         ],
         "specialized": [
+            "WebSocket (STOMP)",
             "REST APIs",
-            "WebSocket",
-            "STOMP",
             "UI/UX Design",
-            "Computer Vision",
-            "Generative AI",
-            "IoT Integration"
+            "State Management (Provider, Riverpod, GetX, Bloc)",
+            "IoT Integration",
+            "Machine Learning"
         ]
     },
     "experience": [
         {
-            "role": "Flutter Developer intern",
+            "role": "Flutter Developer Intern",
             "company": "Sodio Technologies",
-            "duration": "December 2025 - Present",
-            "description": "Building cross-platform mobile experiences as a Flutter Developer intern."
+            "duration": "December 2024 - Present",
+            "description": "Developed and maintained cross-platform mobile applications using Flutter and Dart, integrating REST APIs and Firebase services while optimizing responsive UI across Android devices."
+        },
+        {
+            "role": "Flutter Developer",
+            "company": "Visital",
+            "duration": "September 2025 - November 2025",
+            "description": "Focused on user experience and responsive UI design by integrating backend APIs and implementing reusable widgets and scalable UI components."
         },
         {
             "role": "Flutter Developer",
             "company": "TechnoClare",
             "duration": "July 2024 - May 2025",
-            "description": "Developed mobile applications and collaborated on cross-functional software development projects."
-        },
-        {
-            "role": "Flutter Developer (Freelance)",
-            "company": "Sainath Travels",
-            "duration": "August 2024 - October 2024",
-            "description": "Designed and developed mobile solutions tailored for travel services."
+            "description": "Built and maintained mobile applications using Flutter framework, implementing authentication flows, state management, and production deployment workflows."
         },
         {
             "role": "Sales And Marketing Intern",
             "company": "HighRadius",
             "duration": "May 2024 - June 2024",
-            "description": "Engaged in sales and marketing operations during a two-month internship."
+            "description": "Gained experience in sales and marketing operations during a two-month summer internship."
         },
         {
             "role": "Intern Mobile Developer",
             "company": "Artifintel",
             "duration": "November 2022 - January 2023",
-            "description": "Gained initial hands-on experience in mobile application development."
+            "description": "Assisted in the development of mobile applications and gained hands-on experience in the mobile software development lifecycle."
         }
     ],
     "projects": [
@@ -131,22 +137,22 @@ const PORTFOLIO_DATA = {
     "education": [
         {
             "institution": "GIET University, Gunupur",
-            "degree": "Bachelor of Technology - BTech, Computer Science and Engineering",
+            "degree": "Bachelor of Technology in Computer Science",
             "duration": "2021 - 2025"
         },
         {
             "institution": "Kendriya Vidyalaya No. 2, Bhubaneswar",
-            "degree": "Senior Secondary (Class XII)",
+            "degree": "Pre-University (Class XII)",
             "duration": "2019 - 2021"
         }
     ],
     "certifications": [
-        "Python(basics) - HackerRank",
+        "Python (basics) - HackerRank",
+        "Problem solving (Basics) - HackerRank",
         "Flutter - Simplilearn",
-        "Problem solving(Basics) - HackerRank",
         "Android Development Course (Nov 2021)",
         "Python and Flask Workshop (Apr 2022)",
-        "Wipro TalentNext Program (Jun 2024)",
-        "Cambridge Capable Program (Jun 2023)"
+        "Cambridge Capable Program (Jun 2023)",
+        "Wipro TalentNext Program (Jun 2024)"
     ]
 };
