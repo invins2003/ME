@@ -1,11 +1,11 @@
 const PORTFOLIO_DATA = {
     "personalInfo": {
         "name": "Ambit Misra",
-        "role": "Flutter Developer | Aspiring Full-Stack Android Engineer",
+        "role": "Flutter Developer",
         "location": "Bhubaneswar, Odisha, India",
         "email": "ambitmisra@gmail.com",
         "phone": "+91 8456932901",
-        "summary": "Highly motivated Computer Science graduate with expertise in Flutter and Android development, focused on building robust cross-platform mobile experiences. Proven track record in developing production-ready applications, integrating REST APIs, and collaborating on complex backend architectures."
+        "summary": "Computer Science graduate with expertise in Flutter, Android, and Dart, focused on building robust and efficient cross-platform applications. Proven experience in integrating REST APIs, Firebase services, and backend technologies like Python and Java for real-world projects."
     },
     "socialLinks": {
         "linkedin": "https://www.linkedin.com/in/ambit-misra-5b2202241",
@@ -14,81 +14,79 @@ const PORTFOLIO_DATA = {
     "skills": {
         "languages": [
             "Dart",
-            "Java",
-            "Python",
-            "Kotlin",
             "JavaScript",
             "TypeScript",
             "SQL",
-            "HTML/CSS"
+            "HTML/CSS",
+            "Python",
+            "Kotlin",
+            "Java"
         ],
         "frameworks": [
             "Flutter",
-            "Android SDK",
-            "Spring Boot",
-            "Flask",
-            "Django",
-            "FastAPI",
+            "Firebase",
             "Node.js",
-            "Express.js",
             "Capacitor",
-            "Jetpack Compose"
-        ],
-        "tools": [
-            "Git",
-            "GitHub",
-            "Docker",
-            "Android Studio",
-            "VS Code",
-            "Postman",
-            "Firebase Console",
-            "Figma",
-            "Jira"
-        ],
-        "specialized": [
-            "WebSocket",
-            "STOMP",
-            "REST APIs",
-            "UI/UX Design",
-            "Firebase Firestore",
+            "Express.js",
+            "Flask",
             "Provider",
             "Riverpod",
             "GetX",
             "Bloc",
-            "SQLite",
-            "Push Notifications"
+            "Jetpack Compose",
+            "SpringBoot"
+        ],
+        "tools": [
+            "Git",
+            "GitHub",
+            "Android Studio",
+            "VS Code",
+            "Postman",
+            "Figma",
+            "Jira",
+            "Docker"
+        ],
+        "specialized": [
+            "Android SDK",
+            "REST APIs",
+            "WebSocket (STOMP)",
+            "UI/UX Design",
+            "State Management",
+            "Push Notifications",
+            "Agile Development",
+            "IoT Integration"
         ]
     },
     "experience": [
         {
             "role": "Flutter Developer Intern",
             "company": "Sodio Technologies",
-            "duration": "December 2025 - Present",
-            "description": "Developed and maintained cross-platform mobile applications using Flutter and Dart. Worked independently on client projects, integrated REST APIs, Firebase services, and optimized responsive UI performance."
+            "duration": "Dec 2025 \u2013 Present",
+            "description": "Developed and maintained cross-platform mobile applications using Flutter and Dart. Integrated REST APIs, Firebase services, and authentication systems while optimizing UI performance across Android devices."
         },
         {
             "role": "Flutter Developer",
             "company": "Visital",
-            "duration": "September 2025 - November 2025",
-            "description": "Developed Flutter-based mobile application features with a focus on user experience and responsive UI design while integrating backend APIs."
+            "duration": "Sept 2025 \u2013 Nov 2025",
+            "description": "Focused on user experience and responsive UI design. Integrated backend APIs and implemented reusable widgets and scalable UI components for production-ready applications."
         },
         {
             "role": "Flutter Developer",
             "company": "TechnoClare",
-            "duration": "July 2024 - May 2025",
-            "description": "Built and maintained mobile applications using the Flutter framework, implemented authentication flows, and dynamic UI components."
+            "duration": "July 2024 \u2013 May 2025",
+            "description": "Built mobile applications using Flutter and Dart. Implemented authentication flows, state management, and production deployment workflows."
         },
         {
             "role": "Sales And Marketing Intern",
             "company": "HighRadius",
-            "duration": "May 2024 - June 2024",
-            "description": "Participated in professional sales and marketing operations and internship workflows."
+            "duration": "May 2024 \u2013 June 2024",
+            "description": "Contributed to sales and marketing initiatives during a two-month internship."
         },
         {
             "role": "Intern Mobile Developer",
             "company": "Artifintel",
-            "duration": "November 2022 - January 2023",
-            "description": "Assisted in the development of mobile applications and gained hands-on experience in Android development."
+            "duration": "Nov 2022 \u2013 Jan 2023",
+            "description": "Assisted in the development of mobile application features and UI components."
         }
     ],
     "projects": [
@@ -143,25 +141,23 @@ const PORTFOLIO_DATA = {
     ],
     "education": [
         {
-            "institution": "GIET University Gunupur",
-            "degree": "Bachelor of Technology - BTech, Computer Science",
-            "duration": "December 2021 - December 2025"
+            "institution": "GIET University, Gunupur",
+            "degree": "Bachelor of Technology in Computer Science",
+            "duration": "Dec 2021 \u2013 May 2025"
         },
         {
-            "institution": "Kendriya Vidyalaya No. 2 CRPF Campus",
-            "degree": "Pre-University (Class XII)",
-            "duration": "June 2019 - August 2021"
+            "institution": "Kendriya Vidyalaya No. 2, CRPF Campus",
+            "degree": "Pre-University Education (Class XII)",
+            "duration": "June 2019 \u2013 Aug 2021"
         }
     ],
     "certifications": [
-        "Python(basics) - HackerRank",
+        "Python (Basics) - HackerRank",
+        "Problem Solving (Basics) - HackerRank",
         "Flutter - Simplilearn",
-        "Problem solving(Basics) - HackerRank",
-        "Android Development Course (Nov 2021)",
-        "Python and Flask Workshop (Coding Ninjas)",
-        "GUI with Python Workshop (DSC GIETU)",
-        "Manual Robotics Workshop (SARS Club GIETU)",
-        "Cambridge Capable Program",
-        "Wipro TalentNext Program"
+        "Android Development Course - Nov 2021",
+        "Python and Flask Workshop - Apr 2022",
+        "Wipro TalentNext Program - Jun 2024",
+        "Cambridge Capable Program - Jun 2023"
     ]
 };
