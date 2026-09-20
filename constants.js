@@ -5,7 +5,7 @@ const PORTFOLIO_DATA = {
         "location": "Bhubaneswar, Odisha, India",
         "email": "ambitmisra@gmail.com",
         "phone": "+91 8456932901",
-        "summary": "A highly motivated Flutter Developer and Computer Science graduate with extensive experience in building production-ready cross-platform mobile applications. Proficient in Dart, Firebase, and REST API integration, with a strong focus on responsive UI design and scalable software architecture."
+        "summary": "A highly motivated Computer Science graduate specializing in Flutter and Android development with extensive experience in building production-ready cross-platform applications. He is proficient in integrating REST APIs, Firebase, and real-time communication systems like WebSockets to deliver scalable mobile experiences."
     },
     "socialLinks": {
         "linkedin": "https://www.linkedin.com/in/ambit-misra-5b2202241",
@@ -26,15 +26,15 @@ const PORTFOLIO_DATA = {
             "Flutter",
             "Firebase",
             "Node.js",
-            "Capacitor",
             "Express.js",
+            "Spring Boot",
+            "Flask",
+            "Jetpack Compose",
+            "Capacitor",
             "Provider",
             "Riverpod",
             "GetX",
-            "Bloc",
-            "Flask",
-            "Spring Boot",
-            "Jetpack Compose"
+            "Bloc"
         ],
         "tools": [
             "Git",
@@ -47,45 +47,47 @@ const PORTFOLIO_DATA = {
             "Docker"
         ],
         "specialized": [
-            "Mobile Application Development",
+            "Cross-Platform Development",
+            "Responsive UI Design",
             "REST API Integration",
             "WebSocket (STOMP)",
-            "UI/UX Design",
             "State Management",
             "Push Notifications (FCM)",
-            "IoT Integration"
+            "IoT Integration",
+            "Generative AI",
+            "Computer Vision"
         ]
     },
     "experience": [
         {
             "role": "Flutter Developer Intern",
             "company": "Sodio Technologies",
-            "duration": "Dec. 2025 \u2013 Present",
-            "description": "Developed cross-platform mobile applications using Flutter and Dart. Integrated Firebase services, authentication systems, and optimized responsive UI for Android devices."
+            "duration": "December 2025 \u2013 Present",
+            "description": "Developed and maintained cross-platform mobile applications using Flutter and Dart. Integrated REST APIs, Firebase services, and optimized application performance across Android devices."
         },
         {
             "role": "Flutter Developer",
             "company": "Visital",
-            "duration": "Sept. 2025 \u2013 Nov. 2025",
-            "description": "Developed mobile application features with a focus on user experience and responsive UI. Integrated backend APIs and implemented reusable widgets."
+            "duration": "September 2025 \u2013 November 2025",
+            "description": "Focused on user experience and responsive UI design. Integrated backend APIs and implemented reusable widgets and scalable UI components."
         },
         {
             "role": "Flutter Developer",
             "company": "TechnoClare",
             "duration": "July 2024 \u2013 May 2025",
-            "description": "Built and maintained mobile applications using Dart. Implemented REST API integrations, state management, and contributed to production deployment workflows."
+            "description": "Implemented authentication flows and dynamic UI components using the Flutter framework. Worked on mobile app optimization, state management, and bug resolution."
         },
         {
             "role": "Sales And Marketing Intern",
             "company": "HighRadius",
             "duration": "May 2024 \u2013 June 2024",
-            "description": "Contributed to sales and marketing strategies and cross-functional collaborations during a two-month internship."
+            "description": "Participated in sales and marketing operations and cross-functional collaborations."
         },
         {
             "role": "Intern Mobile Developer",
             "company": "Artifintel",
-            "duration": "Dec 2021 \u2013 Jan 2022",
-            "description": "Gained initial experience in mobile application development workflows and foundational coding practices."
+            "duration": "December 2021 \u2013 January 2022",
+            "description": "Assisted in the development of mobile applications and gained hands-on experience with mobile SDKs."
         }
     ],
     "projects": [
@@ -142,23 +144,23 @@ const PORTFOLIO_DATA = {
         {
             "institution": "GIET University, Gunupur",
             "degree": "Bachelor of Technology (B.Tech) in Computer Science",
-            "duration": "Dec. 2021 \u2013 Dec. 2025"
+            "duration": "December 2021 \u2013 December 2025"
         },
         {
             "institution": "Kendriya Vidyalaya No. 2 CRPF Campus",
-            "degree": "Pre-University Education (Class XII)",
-            "duration": "June 2019 \u2013 Aug. 2021"
+            "degree": "Pre-University Education (Science)",
+            "duration": "June 2019 \u2013 August 2021"
         }
     ],
     "certifications": [
+        "Python(basics) - HackerRank",
+        "Problem solving(Basics) - HackerRank",
+        "Flutter - Simplilearn",
         "Android Development Course (Nov 2021)",
-        "Python and Flask Workshop - Coding Ninjas (Apr 2022)",
-        "GUI with Python Workshop - DSC GIETU (May 2022)",
+        "Python and Flask Workshop (Apr 2022)",
+        "GUI with Python Workshop (May 2022)",
         "Manual Robotics Workshop (Mar 2022)",
         "Cambridge Capable Program (Jun 2023)",
-        "Wipro TalentNext Program (Jun 2024)",
-        "Python (Basics) - HackerRank",
-        "Problem Solving (Basics) - HackerRank",
-        "Flutter - Simplilearn"
+        "Wipro TalentNext Program (Jun 2024)"
     ]
 };
